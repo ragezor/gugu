@@ -1,7 +1,11 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/index/my/my"
+    "pages/index/settings/settings",
+    "pages/index/achieve/achieve",
+    "pages/index/team/team",
+    "pages/index/my/dairy",
+    "pages/index/my/my",
+    "pages/index/index"
   ],
   "subPackages": [],
   "window": {

@@ -32,6 +32,7 @@
 		</view>
 		<view class="flex align-center justify-center margin-top">
 		<view  class="text-yellow text-sm ">常立志更要立长志，来为自己设定一个目标吧！</view>
+		<button @click="jump('/test')">Click Me</button> 
 		
 <button class="cu-btn cuIcon  lg bg-img shadow" style="background-image: url(../../static/first_newGoal.png)"@tap="showModal" data-target="DialogModal1"></button>		
 </view>
@@ -189,6 +190,10 @@
 
 		},
 		methods: {
+			
+			jump (path) {
+			            this.$router.replace(path)
+			        },
 			ListTouchStart(e) {
 							this.listTouchStart = e.touches[0].pageX
 						},
