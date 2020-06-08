@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "uni-app",
+  "usingComponents": {
+    "uni-fab": "/components/uni-fab/uni-fab",
+    "todolist2": "/components/itemList/itemList1",
+    "todolist1": "/components/itemList/itemList"
+  }
+}

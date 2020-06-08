@@ -1,0 +1,66 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+		    "path" : "pages/index/index",
+		    "style" : {
+				"navigationBarTitleText": "uni-app"
+			}
+		}
+        ,{
+            "path" : "pages/my/my",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/login/login",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/team/team",
+            "style" : {}
+        },{
+            "path" : "pages/my/dairy",
+            "style" : {}
+        },{
+            "path" : "pages/summary/summary",
+            "style" : {}
+        },{
+            "path" : "pages/achieve/achieve",
+            "style" : {}
+        },{
+            "path" : "pages/settings/settings",
+            "style" : {}
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"navigationStyle": "custom"
+	},
+	"tabBar":{
+		"color":"#666666",
+		"selectedColor":"#ff5a5f",
+		"borderStyle":"black",
+		"list":[
+			{
+				"pagePath":"pages/index/index",
+				"text":"首页",
+				"iconPath":"static/tabbar/basics.png",
+				"selectedIconPath":"static/tabbar/basics_cur.png"
+			},
+			{
+				"pagePath":"pages/team/team",
+				"text":"小组",
+				"iconPath":"/static/tabbar/basics.png",
+				"selectedIconPath":"static/tabbar/basics_cur.png"
+			},
+			{
+				"pagePath":"pages/my/my",
+				"text":"我的",
+				"iconPath":"static/tabbar/component.png",
+				"selectedIconPath":"static/tabbar/component_cur.png"
+			}
+		]
+	}
+}
