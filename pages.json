@@ -18,7 +18,7 @@
             "path" : "pages/team/team",
             "style" : {}
         },{
-            "path" : "pages/my/dairy",
+            "path" : "pages/diary/diary",
             "style" : {}
         },{
             "path" : "pages/summary/summary",
@@ -28,6 +28,10 @@
             "style" : {}
         },{
             "path" : "pages/settings/settings",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/diary/moods/moods",
             "style" : {}
         }
     ],

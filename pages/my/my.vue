@@ -36,7 +36,7 @@
 				<view class="text-grey">计划清单</text></view>
 			</view>
 			<view>
-				<button class=" cu-btn bg-img lg text-white" style="background-image: url(../../../static/me_diary.png)" @click="toDairy"></button>
+				<button class=" cu-btn bg-img lg text-white" style="background-image: url(../../../static/me_diary.png)" @click="toDiary"></button>
 				<view class="text-grey">心情日记</text></view>
 			</view>
 			<view>
@@ -99,9 +99,9 @@
 				    url: '/pages/index/index'
 				});
 			},
-			toDairy(){
+			toDiary(){
 				uni.navigateTo({
-					url:"/pages/my/dairy"
+					url:"/pages/diary/diary"
 				})
 			},
 			toSummary(){
