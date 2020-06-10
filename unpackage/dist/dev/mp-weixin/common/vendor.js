@@ -8662,7 +8662,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/team/team": { "navigationBarTitleText": "uni-app", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/index/my/dairy": { "navigationBarTitleText": "uni-app", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/index/my/my": { "navigationBarTitleText": "uni-app", "usingComponents": { "uni-grid": "/components/uni-grid/uni-grid", "uni-grid-item": "/components/uni-grid-item/uni-grid-item" }, "usingAutoImportComponents": {} }, "pages/index/index": { "navigationBarTitleText": "uni-app", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/index/achieve/achieve": { "navigationBarTitleText": "uni-app", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/index/settings/settings": { "navigationBarTitleText": "uni-app" } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8", "navigationStyle": "custom" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/team/no_team": { "navigationBarTitleText": "uni-app", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/index/settings/settings": { "navigationBarTitleText": "uni-app", "usingComponents": { "uni-list": "/components/uni-list/uni-list", "uni-list-item": "/components/uni-list-item/uni-list-item" }, "usingAutoImportComponents": { "uni-list-item": "/components/uni-list-item/uni-list-item" } }, "pages/index/achieve/achieve": { "navigationBarTitleText": "uni-app", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/index/team/team": { "navigationBarTitleText": "uni-app", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/index/my/dairy": { "navigationBarTitleText": "uni-app", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/index/my/my": { "navigationBarTitleText": "uni-app", "usingComponents": { "uni-grid": "/components/uni-grid/uni-grid", "uni-grid-item": "/components/uni-grid-item/uni-grid-item" }, "usingAutoImportComponents": {} }, "pages/index/index": { "navigationBarTitleText": "uni-app", "usingComponents": {}, "usingAutoImportComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8", "navigationStyle": "custom" } };exports.default = _default;
 
 /***/ }),
 
@@ -8678,7 +8678,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 98:
+/***/ 99:
 /*!************************************************************************************!*\
   !*** /Users/ragezor/Documents/HBuilderProjects/gugu/components/uni-icons/icons.js ***!
   \************************************************************************************/

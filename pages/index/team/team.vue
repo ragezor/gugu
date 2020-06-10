@@ -11,12 +11,12 @@
 	     <view>
 			 <view class="flex justify-center align-start"><text class="light text-pink">{{team_name}}</text></view>
 		 <!-- 头像和上标 -->
-		 <view class="cu-avatar radius sm margin-left bg-white  margin-top" style="background-image:url(../../../static/D99BF290B33967FFC81E18410C8F6FF3.jpg);"><view class=' bg-green cu-tag badge cuIcon-check'></view></view>
-		 <view class="cu-avatar radius sm margin-left bg-white margin-top" style="background-image:url(../../../static/D99BF290B33967FFC81E18410C8F6FF3.jpg);"><view class=' bg-red cu-tag badge cuIcon-close'></view></view>
-		 <view class="cu-avatar radius sm margin-left bg-white margin-top" style="background-image:url(../../../static/D99BF290B33967FFC81E18410C8F6FF3.jpg);"></view>
+		 <view class="cu-avatar radius lg margin-left bg-white  margin-top" style="background-image:url(../../../static/D99BF290B33967FFC81E18410C8F6FF3.jpg);"><view class=' bg-green cu-tag badge cuIcon-check'></view></view>
+		 <view class="cu-avatar radius lg margin-left bg-white margin-top" style="background-image:url(../../../static/D99BF290B33967FFC81E18410C8F6FF3.jpg);"><view class=' bg-red cu-tag badge cuIcon-close'></view></view>
+		 <view class="cu-avatar radius lg margin-left bg-white margin-top" style="background-image:url(../../../static/D99BF290B33967FFC81E18410C8F6FF3.jpg);"></view>
 		 </view>
 	</view> 
-	<button class="cu-btn block light bg-blue margin-tb-sm lg" >召唤鸽子</button>
+	<button class="cu-btn share-btn block light bg-blue margin-tb-sm lg "open-type="share" >召唤鸽子</button>
 	</view>
 </template>
 
@@ -26,6 +26,16 @@
 			return{
 				team_name:'小程序我们已经鸽了',
 			}
+			},
+			methods:{
+				onShareAppMessage: function(e) {
+								let title = '快来学习！'
+								return {
+									title: title,
+									path: 'pages/index/team/team'
+								}
+							}
+			
 			}
 		}
 </script>
