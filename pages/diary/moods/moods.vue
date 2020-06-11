@@ -92,7 +92,7 @@
 			},
 			addDiary(){
 				const requestTask = uni.request({
-				    url: 'https://www.doaho.work:8080/diary/add?salt=a', //仅为示例，并非真实接口地址。
+				    url: 'https://www.doaho.work:8080/diary/add?salt='+this.$store.state.userinfo['salt'], //仅为示例，并非真实接口地址。
 				    method: 'POST',
 					data: {
 				        'moodId': this.selectIndex,

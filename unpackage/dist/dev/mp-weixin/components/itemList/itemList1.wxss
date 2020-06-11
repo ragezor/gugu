@@ -129,8 +129,8 @@ view {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
           flex: 1;
-  height: 45px;
-  line-height: 45px;
+  height: 60px;
+  line-height: 25px;
   padding: 0 15px;
   position: relative;
   background-color: #fff;

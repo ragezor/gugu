@@ -5,14 +5,15 @@
 		 @touchstart="ListTouchStart" @touchmove="ListTouchMove" @touchend="ListTouchEnd" :data-target="'move-box-' + index">
 			<view class="cu-avatar round lg" :style="[{backgroundImage:'url(https://ossweb-img.qq.com/images/lol/web201310/skin/big2100'+ (index+2) +'.jpg)'}]"></view>
 			<view class="content">
-				<view class="text-grey">【{{subjects[item.subjectId]}}】</view>
+				<view class="text-grey">【{{subjects[item.subjectId-1]}}】</view>
 				<view class="text-gray text-sm">
-					<text class=" text-red  margin-right-xs">{{item.startTime.split(" ")[1]}}</text>{{learnStyle[item.subjectId][item.learnStyleId]}}</view>
+					<text class=" text-red  margin-right-xs">{{item.startTime.split(" ")[1]}}</text>{{learnStyle[item.learnStyleId-1]}}
+				</view>
 			</view>
 			<view>备注:{{item.content}}</view>
 			<view class="action">
 				<text v-if='item.isCompleted==1' class="cuIcon-roundcheckfill text-green text-shadow margin-right-xs"></text>
-				<text v-else-if='item.isCompleted==0 && new Date(item.endTime).toLocaleDateString() < new Date().toLocaleDateString()' class="cuIcon-roundclosefill text-red text-shadow margin-right-xs"></text>
+				<text v-else-if='item.isCompleted==0 && item.startTime < getDate()' class="cuIcon-roundclosefill text-red text-shadow margin-right-xs"></text>
 				<text v-else class="cuIcon-timefill text-blue text-shadow margin-right-xs"></text>
 			</view>
 			<view class="move" v-if="scroll==today">
@@ -33,19 +34,24 @@
 		props:['todolist','today','scroll'],
 		data() {
 			return {
-				subjects: ['数学', '英语', '政治', '专业课'],
-				learnStyle: [
-					['做题', '看书', '看视频'],
-					['做题', '背单词', '看书', '看视频'],
-					['做题', '看书', '看视频'],
-					['做题', '看书', '看视频']
-				],
+				subjects: ['数学', '英语', '专业课', '政治'],
+				learnStyle: ['做题', '背单词', '看书', '看视频'],
 				modalName:null,
 				listTouchStart: 0,
 				listTouchDirection: null,
 			}
 		},
 		methods: {
+			getDate(){
+				const date = new Date();
+				let year = date.getFullYear();
+				let month = date.getMonth() + 1;
+				let day = date.getDate();
+				month = month > 9 ? month : '0' + month;;
+				day = day > 9 ? day : '0' + day;
+					
+				return `${year}-${month}-${day}`;
+			},
 			complete(todoid,index){
 				this.todolist[index].isCompleted = 1
 				this.$emit("completeTodoItem",todoid)

@@ -1,20 +1,20 @@
 <template>
 	<view>
-		<!-- #ifndef MP-WEIXIN -->
+		<view v-if="isCanUse">
 			<view>
 				<view class='header'>
-					图片1111
-					<!-- <image src='../../static/wx_login.png'></image> -->
+					<!-- <image src='../../static/img/wx_login.png'></image> -->
 				</view>
 				<view class='content'>
 					<view>申请获取以下权限</view>
 					<text>获得你的公开信息(昵称，头像、地区等)</text>
 				</view>
-				<button class='bottom' type='primary' open-type="getUserInfo" @getuserinfo="wxGetUserInfo">
+
+				<button class='bottom' type='primary' open-type="getUserInfo" withCredentials="true" lang="zh_CN" @getuserinfo="wxGetUserInfo">
 					授权登录
 				</button>
 			</view>
-		<!-- #endif -->
+		</view>
 	</view>
 </template>
 
@@ -22,66 +22,79 @@
 	export default {
 		data() {
 			return {
-				Global:{
-					url:'123'
-				}
+				SessionKey: '',
+				OpenId: '',
+				nickName: null,
+				avatarUrl: null,
+				isCanUse: !uni.getStorageSync('userinfo')//默认为true
 			};
 		},
 		methods: {
-			wxGetUserInfo(){
-				var url = this.Global.url
+			//第一授权获取用户信息===》按钮触发
+			wxGetUserInfo() {
+				let _this = this;
+				uni.showLoading({
+					title: '登录中...'
+				});
+				// 1.wx获取登录用户code
 				uni.login({
-					success: res => {
-						var code = res.code;
-						console.log(code);
-						uni.getUserInfo({
-							success: res => {
-								console.log(res);
-								uni.request({
-									url: url + 'Api/Login/getsessionkey',
-									method: 'POST',
-									data: {
-										code: code
-									},
-									header: {
-										'content-type': 'application/x-www-form-urlencoded'
-									},
-									success: ress => {
-										console.log(ress.data);
-										// 通过微信自带code，向后台获取openID、session_key
-										uni.setStorageSync('openid', ress.data.openid);
-										uni.setStorageSync('session_key', ress.data.session_key);
-										uni.request({
-											url: url + 'Api/Login/authlogin',
-											method: 'POST',
-											data: {
-												openid: uni.getStorageSync('openid'),
-												NickName: res.userInfo.nickName,
-												HeadUrl: res.userInfo.avatarUrl,
-												gender: res.userInfo.gender
-											},
-											header: {
-												'content-type': 'application/x-www-form-urlencoded'
-											},
-											success: res => {
-												// 获取用户ID
-												var id = res.data.arr.ID;
-												uni.setStorageSync('id', id);
-												uni.switchTab({
-												    url: '../index/index'
-												})
-											}
-										})
-									}
-								})
+					provider: 'weixin',
+					success: function(loginRes) {
+						let code = loginRes.code;
+						console.info(code)
+						// if (!_this.isCanUse) {
+						// 	//非第一次授权获取用户信息
+						// 	uni.getUserInfo({
+						// 		provider: 'weixin',
+						// 		success: function(infoRes) {
+						// 			//获取用户信息后向调用信息更新方法
+						// 			console.info(infoRes)
+						// 			let nickName = infoRes.userInfo.nickName; //昵称
+						// 			let avatarUrl = infoRes.userInfo.avatarUrl; //头像
+						// 			_this.updateUserInfo(); //调用更新信息方法
+						// 		}
+						// 	});
+						// }
+
+						//2.将用户登录code传递到后台置换用户SessionKey、OpenId等信息
+						uni.request({
+							url: 'https://www.doaho.work:8080/user/login',
+							data: {
+								code: code,
+							},
+							method: 'GET',
+							header: {
+								'content-type': 'application/json'
+							},
+							success: (res) => {
+								//openId、或SessionKdy存储//隐藏loading
+								console.info(res)
+								if (res.data.success) {
+									_this.$store.commit("login",res.data.data)
+									uni.getUserInfo({
+										provider: 'weixin',
+										success: function(infoRes) {
+											//获取用户信息后向调用信息更新方法
+											console.info(infoRes)
+											_this.$store.commit('updateUserInfo',infoRes.userInfo)
+											// let nickName = infoRes.userInfo.nickName; //昵称
+											// let avatarUrl = infoRes.userInfo.avatarUrl; //头像
+											// _this.updateUserInfo(); //调用更新信息方法
+										}
+									});
+									uni.hideLoading();
+									uni.navigateBack()
+								}
 							}
-						})
+						});
 					}
-				})
-			}
+				});
+			},
 		}
 	}
 </script>
+
+
 
 <style>
 	.header {
@@ -115,4 +128,3 @@
 		font-size: 35rpx;
 	}
 </style>
-

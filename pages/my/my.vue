@@ -9,10 +9,12 @@
 
 
 			<view class="flex justify-around align-end ">
-				<view class="cu-avatar xl round margin-top" style="background-image:url(../../../static/D99BF290B33967FFC81E18410C8F6FF3.jpg);"></view>
+				<view v-if="hasLogin" class="cu-avatar xl round margin-top" :style="[{backgroundImage:`url(${avatarUrl})`}]"></view>
+				<view v-else class="cu-avatar xl round margin-top" style="background-image:url(../../../static/D99BF290B33967FFC81E18410C8F6FF3.jpg);"></view>
 				<view class="gaol">
-					<view class="text-white text-lg">{{name}}</view>
-					<view class="text-white text-sm  margin-top">{{goal}}</view>
+					<view v-if="hasLogin" class="text-white text-lg">{{nickName}}</view>
+					<button v-else @click="login">Login</button>
+					<view class="text-white text-sm  margin-top">{{userinfo['motto']==null?'':userinfo['motto']}}</view>
 				</view>
 
 			</view>
@@ -73,8 +75,11 @@
 <script>
 	import uniGrid from "@/components/uni-grid/uni-grid.vue"
 	import uniGridItem from "@/components/uni-grid-item/uni-grid-item.vue"
-
+	import { mapState } from "vuex"
 	export default {
+		onShow() {
+			console.info(this.hasLogin)
+		},
 		components: {					
 			uniGrid,
 			uniGridItem
@@ -86,11 +91,21 @@
 				gridBorder: false,
 				name: '从不水鸭儿',
 				goal: '立志考上东北大学软件学院学硕',
-				space: '&#12288;'
-
+				space: '&#12288;',
 			}
 		},
+		computed:mapState({
+			hasLogin: state => state.hasLogin,
+			userinfo: state => state.userinfo,
+			nickName: state => state.nickName,
+			avatarUrl: state => state.avatarUrl
+		}),
 		methods: {
+			login(){
+				uni.navigateTo({
+					url:'../login/login'
+				})
+			},
 			NavChange: function(e) {
 				this.PageCur = e.currentTarget.dataset.cur
 			},
@@ -124,7 +139,6 @@
 					url:"/pages/settings/settings"
 				})
 			}
-
 		}
 	}
 </script>

@@ -18,6 +18,9 @@
             "path" : "pages/team/team",
             "style" : {}
         },{
+            "path" : "pages/team/no_team",
+            "style" : {}
+        },{
             "path" : "pages/diary/diary",
             "style" : {}
         },{
@@ -34,6 +37,7 @@
             "path" : "pages/diary/moods/moods",
             "style" : {}
         }
+        
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

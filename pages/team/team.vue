@@ -22,6 +22,9 @@
 
 <script>
 	export default {
+		onShow() {
+			console.info()
+		},
 		data() {
 			return{
 				team_name:'小程序我们已经鸽了',

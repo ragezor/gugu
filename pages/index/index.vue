@@ -78,64 +78,115 @@
 				</view>
 			</view>
 		</view>
-		<!-- 	<view class="cu-list menu" :class="['card-menu','margin-bottom']">
-			<view class="cu-item margin-top" v-for="item in todolist" style="background-color: #CCE6FF;">
-				<view class="content">
-					<image src="/static/me_todo.png" class="png" mode="aspectFit"></image>
-					<text class="text-green">{{subjects[item.subjectId]}}</text>
-					<text class="text-grey">{{learnStyle[item.subjectId][item.learnStyleId]}}</text>
-					<text class="text-grey">{{item.content}}</text>
-					<text class="text-grey">{{item.startTime}}</text>
-				</view>
-			</view>
+		<!-- <todolist1 :todolist='todolist' :today='today' :scroll='scroll' @completeTodoItem="completeTodoItem"
+		 @uncompleteTodoItem="uncompleteTodoItem" @deleteTodoItem="deleteTodoItem"></todolist1> -->
+	<!-- 	todolist2 -->
+		<todolist2 :todolist="todolist" @completeTodoItem="completeTodoItem"
+		 @uncompleteTodoItem="uncompleteTodoItem" @deleteTodoItem="deleteTodoItem"></todolist2>
+<!-- 
+		<view class="flex justify-end margin-top"> <button class="cu-btn cuIcon bg-img shadow xxl" style="background-image: url(../../static/first_newTodo.png)"
+			 @tap="showModal" data-target="DialogModal2"></button>
 		</view> -->
-
-		<!-- todolist1 -->
-		<todolist1 :todolist='todolist' :today='today' :scroll='scroll' @completeTodoItem="completeTodoItem" @uncompleteTodoItem="uncompleteTodoItem"
-		 @deleteTodoItem="deleteTodoItem"></todolist1>
-		  <!-- todolist2 -->
-			<!-- <todolist2 :todolist="todolist"></todolist2> -->
-
-			<view class="flex justify-end margin-top"> <button class="cu-btn cuIcon bg-img shadow xxl" style="background-image: url(../../static/first_newTodo.png)"
-				 @tap="showModal" data-target="DialogModal2"></button>
-			</view>
-			<view class="cu-modal" :class="modalName=='DialogModal2'?'show':''">
-				<view class="cu-dialog">
-					<view class="cu-bar bg-white justify-end">
-						<view class="content">新建任务</view>
-						<view class="action" @tap="hideModal">
-							<text class="cuIcon-close text-red"></text>
+		<view class="cu-modal" :class="modalName=='DialogModal2'?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">新建任务</view>
+				</view>
+				<view class="uni-list">
+					<view class="uni-list-cell">
+						<view class="uni-list-cell-left">
+							任务选择
+						</view>
+						<view class="uni-list-cell-db">
+							<picker mode="multiSelector" @columnchange="bindMultiPickerColumnChange" :value="multiIndex" :range="multiArray">
+								<view class="uni-input">{{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}</view>
+							</picker>
 						</view>
 					</view>
-					<view class="padding-xl">
-						<view class="col-3">
-							<view class="cu-form-group">
-								<view class="flex justify-between ">
-									<view class="title">任务</view>
-									<input placeholder="我要打十个!" name="input"></input>
-								</view>
-							</view>
-
+					<view class="uni-list-cell">
+						<view class="uni-list-cell-left">
+							日期选择
+						</view>
+						<view class="uni-list-cell-db">
+							<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange">
+								<view class="uni-input">{{date}}</view>
+							</picker>
 						</view>
 					</view>
-					<view class="cu-bar bg-white justify-end">
-						<view class="action">
-							<button class="cu-btn line-grey text-green" @tap="hideModal">取消</button>
-							<button class="cu-btn bg-pink margin-left" @tap="hideModal">确定</button>
+					<view class="uni-list-cell">
+						<view class="uni-list-cell-left">
+							时间选择
+						</view>
+						<view class="uni-list-cell-db">
+							<picker mode="time" :value="time" start="00:00" end="23:59" @change="bindTimeChange">
+								<view class="uni-input">{{time}}</view>
+							</picker>
+						</view>
+					</view>
+					<view class="uni-list-cell">
+						<view class="uni-list-cell-left">
+							内容补充
+						</view>
+						<view class="uni-list-cell-db">
+							<input class="uni-input" style="height: auto;" placeholder="选填" :value="inputClearValue" @input="clearInput" />
 						</view>
 					</view>
 				</view>
+				<!-- <view class="padding-xl">
+					<view class="col-3">
+						<view class="cu-form-group">
+							<view class="flex justify-between ">
+								
+							</view>
+						</view>
+
+					</view>
+				</view> -->
+				<view class="cu-bar bg-white justify-end">
+					<view class="action">
+						<button class="cu-btn line-grey text-green" @tap="hideModal">取消</button>
+						<button class="cu-btn bg-pink margin-left" @tap="hideModal" @click="addTodoItem">确定</button>
+					</view>
+				</view>
 			</view>
+		</view>
+
+		<uni-fab ref="fab" :pattern="pattern" :content="content" :horizontal="horizontal" :vertical="vertical" :direction="direction"
+		 @trigger="trigger" />
+
 	</view>
 </template>
 
 <script>
 	import todolist2 from '@/components/itemList/itemList1'
 	import todolist1 from '@/components/itemList/itemList'
+	import fab from '@/components/uni-fab/uni-fab.vue'
+	import {
+		mapState
+	} from 'vuex'
+
+	function getDate(type) {
+		const date = new Date();
+
+		let year = date.getFullYear();
+		let month = date.getMonth() + 1;
+		let day = date.getDate();
+
+		if (type === 'start') {
+			year = year;
+		} else if (type === 'end') {
+			day = day + 7;
+		}
+		month = month > 9 ? month : '0' + month;;
+		day = day > 9 ? day : '0' + day;
+
+		return `${year}-${month}-${day}`;
+	}
 	export default {
 		components: {
 			todolist2,
 			todolist1,
+			fab
 		},
 		onLoad() {
 			console.info('index onLoad')
@@ -145,7 +196,16 @@
 		},
 		data() {
 			return {
-				menuArrow: false,
+				inputClearValue: '',
+				showClearIcon: false,
+				multiArray: [
+					['数学', '英语', '政治', '专业课'],
+					['做题', '看书', '看视频']
+				],
+				multiIndex: [0, 0],
+				horizontal: 'left',
+				vertical: 'bottom',
+				direction: 'horizontal',
 				index: -1,
 				todolist: [],
 				picker: ['考研', '四六级', '考证', '实习'],
@@ -155,73 +215,166 @@
 				words: '再不学习就只有继续当咸鱼咯',
 				scroll: 1,
 				time: '12:01',
-				date: '2020-5-20',
+				date: getDate({
+					format: true
+				}),
+				startDate: getDate('start'),
+				endDate: getDate('end'),
 				allDays: 31,
 				today: 1,
 				modalName: null,
+				pattern: {
+					color: '#7A7E83',
+					backgroundColor: '#fff',
+					selectedColor: '#007AFF',
+					buttonColor: '#007AFF'
+				},
+				content: [{
+						iconPath: '/static/component.png',
+						selectedIconPath: '/static/componentHL.png',
+						text: '添加任务',
+						active: false
+					},
+					{
+						iconPath: '/static/api.png',
+						selectedIconPath: '/static/apiHL.png',
+						text: '记录心情',
+						active: false
+					},
+					{
+						iconPath: '/static/template.png',
+						selectedIconPath: '/static/templateHL.png',
+						text: '更改目标',
+						active: false
+					}
+				]
 			}
 		},
 		methods: {
+			clearInput: function(event) {
+				this.inputClearValue = event.detail.value;
+				if (event.detail.value.length > 0) {
+					this.showClearIcon = true;
+				} else {
+					this.showClearIcon = false;
+				}
+			},
+			bindDateChange: function(e) {
+				this.date = e.detail.value
+			},
+			bindTimeChange: function(e) {
+				this.time = e.detail.value
+			},
+			bindMultiPickerColumnChange: function(e) {
+				console.log('修改的列为：' + e.detail.column + '，值为：' + e.detail.value)
+				this.multiIndex[e.detail.column] = e.detail.value
+				switch (e.detail.column) {
+					case 0: //拖动第1列
+						switch (this.multiIndex[0]) {
+							case 0:
+								this.multiArray[1] = ['做题', '看书', '看视频']
+								break
+							case 1:
+								this.multiArray[1] = ['做题', '背单词', '看书', '看视频']
+								break
+							case 2:
+								this.multiArray[1] = ['做题', '看书', '看视频']
+								break
+							case 3:
+								this.multiArray[1] = ['做题', '看书', '看视频']
+								break
+						}
+						// this.multiIndex.splice(1, 1, 0)
+						break
+				}
+				this.$forceUpdate()
+			},
+			trigger(e) {
+				if (e.index == 0) {
+					this.modalName = 'DialogModal2'
+				} else if (e.index == 1) {
+					uni.navigateTo({
+						url: '../diary/moods/moods'
+					})
+				} else if (e.index == 2) {
+					this.modalName = 'DialogModal1'
+				}
+			},
 			getTodolist(startTime) {
 				console.info('调用todolist/get接口')
-				console.info(startTime)
-				var _self = this;
+				this.todolist = []
 				uni.request({
-					url: 'https://www.doaho.work:8080/todolist/get?salt=a&startDate=' + startTime, //请求接口
+					url: 'https://www.doaho.work:8080/todolist/get?salt=' + this.userinfo['salt'] + '&startDate=' +
+						startTime, //请求接口
 					header: {
 						'content-type': 'application/x-www-form-urlencoded', //自定义请求头信息
 					},
 					success: (res) => {
-						console.info(res)
-						_self.todolist = res.data.data;
+						this.todolist = res.data.data;
 					}
-					
 				});
-				console.info("todolist"+this.todolist)
+				console.info("todolist" + this.todolist)
 			},
 			completeTodoItem(todoid) {
-				console.info(todoid + "标记为已完成")
 				var _self = this;
 				uni.request({
-					url: 'https://www.doaho.work:8080/todolist/complete?salt=a&todoid=' + todoid,
+					url: 'https://www.doaho.work:8080/todolist/complete?salt=' + this.userinfo['salt'] + '&todoid=' +
+						todoid,
 					header: {
 						'content-type': 'application/x-www-form-urlencoded', //自定义请求头信息
 					},
 					success: (res) => {
-						if (res.data.success == 'true') {
-							let startTime = '2020-6-' + this.scroll
-							getTodolist(startTime)
+						if (res.data.success) {
+							console.info(res.data)
 						}
 					}
 				})
 			},
 			uncompleteTodoItem(todoid) {
-				console.info(todoid + "撤销标记")
 				var _self = this;
 				uni.request({
-					url: 'https://www.doaho.work:8080/todolist/uncomplete?salt=a&todoid=' + todoid,
+					url: 'https://www.doaho.work:8080/todolist/uncomplete?salt=' + this.userinfo['salt'] + '&todoid=' +
+						todoid,
 					header: {
 						'content-type': 'application/x-www-form-urlencoded', //自定义请求头信息
 					},
 					success: (res) => {
-						if (res.data.success == 'true') {
-							let startTime = '2020-6-' + this.scroll
-							getTodolist(startTime)
+						if (res.data.success) {
+							console.info(todoid + "撤销标记")
 						}
 					}
 				})
 			},
 			deleteTodoItem(todoid) {
-				console.info(todoid + "清单删除")
 				uni.request({
-					url: 'http://localhost:8070/todolist/delete?salt=a&todoid=' + todoid,
+					url: 'https://www.doaho.work:8080/todolist/delete?salt=' + this.userinfo['salt'] + '&todoid=' + todoid,
 					header: {
 						'content-type': 'application/x-www-form-urlencoded', //自定义请求头信息
 					},
 					success: (res) => {
-						if (res.data.success == 'true') {
-							let startTime = '2020-6-' + this.scroll
-							getTodolist(startTime)
+						if (res.data.success) {
+							console.info(todoid + "清单删除")
+						}
+					}
+				})
+			},
+			addTodoItem(todoid) {
+				console.info("新建任务清单")
+				var _this = this;
+				uni.request({
+					url: 'https://www.doaho.work:8080/todolist/add?salt=' + this.userinfo['salt'],
+					method: 'POST',
+					data: {
+						"startTime": this.date+' '+this.time+':00',
+						"content": this.inputClearValue,
+						"subjectId": this.multiIndex[0]+1,
+						"learnStyleId": this.multiIndex[0]==1 ? this.multiIndex[1]+1 : (this.multiIndex[1]==0 ? 1 : (this.multiIndex[1]+2))
+					},
+					success: function(res) {
+						if (res.data.success) {
+							let startTime = '2020-6-' + _this.scroll
+							_this.getTodolist(startTime)
+							console.info('run here')
 						}
 					}
 				})
@@ -267,6 +420,9 @@
 				var days = (endDate - startDate) / (1 * 24 * 60 * 60 * 1000);
 				return parseInt(days);
 			},
+			...mapState({
+				userinfo: state => state.userinfo
+			})
 		},
 		watch: {
 			scroll(newV) {

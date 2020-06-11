@@ -1,9 +1,19 @@
 <template>
 		<uni-swipe-action>
-			<uni-swipe-action-item v-for="(item,index) in todolist" :options="item.iscompleted==0?options1:options2" :key="item.id" @change="swipeChange"
-			 @click="swipeClick($event,index)">
-				<text class="cont text-green" v-if="item.iscompleted==1">【{{subjects[item.subjectId]}}】| {{learnStyle[item.subjectId][item.learnStyleId]}} | {{item.content}}</text>
-				<text class="cont text-gray" v-else>【{{subjects[item.subjectId]}}】| {{learnStyle[item.subjectId][item.learnStyleId]}} | {{item.content}}</text>
+			<uni-swipe-action-item style="margin-bottom:10px" v-for="(item,index) in todolist" :options="item.startTime < getDate() ? (item.isCompleted == 0 ? options3 : options4): (item.isCompleted==0?options1:options2)" :key="item.id" @change="swipeChange"
+			 @click="swipeClick($event,index,item.id)">
+			 <view class="cont" style="display: flex; flex-direction: row;">
+				 <view style="display: flex; flex-direction: column;">
+					<text>{{item.startTime.split(" ")[1]}}</text>
+					<text class="text-green" v-if="item.isCompleted==1">【{{subjects[item.subjectId-1]}}】| {{learnStyle[item.learnStyleId-1]}} | {{item.content}}</text>
+					<text class="text-gray" v-else>【{{subjects[item.subjectId-1]}}】| {{learnStyle[item.learnStyleId-1]}} | {{item.content}}</text>					
+				 </view>
+			 </view>
+			 <view style="display: flex;align-items: center;padding-right: 10px;">
+					<text v-if='item.isCompleted==1' class="cuIcon-roundcheckfill text-green text-shadow margin-right-xs"></text>
+					<text v-else-if='item.isCompleted==0 && item.startTime < getDate()' class="cuIcon-roundclosefill text-red text-shadow margin-right-xs"></text>
+					<text v-else class="cuIcon-timefill text-blue text-shadow margin-right-xs"></text> 				 
+			 </view>
 			</uni-swipe-action-item>
 		</uni-swipe-action>
 </template>
@@ -33,7 +43,7 @@
 					}
 				}],
 				options2: [{
-					text: '撤销标记',
+					text: '撤销完成标记',
 					style: {
 						backgroundColor: 'rgb(178, 170, 170)'
 					}
@@ -43,41 +53,21 @@
 						backgroundColor: 'rgb(255,58,49)'
 					}
 				}],
-				// todolist: [{
-				// 	"id":1,
-				// 		"startTime": "2020-5-21 20:00:00",
-				// 		"endTime": "2020-5-31 23:30:00",
-				// 		"content": "tesst",
-				// 		"subjectId": "3",
-				// 		"learnStyleId": "2",
-				// 		"iscompleted":"0"
-				// 	},
-				// 	{
-				// 		"id":2,
-				// 		"startTime": "2020-5-21 20:00:00",
-				// 		"endTime": "2020-5-21 22:00:00",
-				// 		"content": "tesst",
-				// 		"subjectId": "3",
-				// 		"learnStyleId": "2",
-				// 		"iscompleted":"0"
-				// 	},
-				// 	{
-				// 		"id":3,
-				// 		"startTime": "2020-5-21 20:00:00",
-				// 		"endTime": "2020-5-21 22:00:00",
-				// 		"content": "tesst",
-				// 		"subjectId": "3",
-				// 		"learnStyleId": "2",
-				// 		"iscompleted":"1"
-				// 	}
-				// ],
-				subjects: ['数学', '英语', '政治', '专业课'],
-				learnStyle: [
-					['做题', '看书', '看视频'],
-					['做题', '背单词', '看书', '看视频'],
-					['做题', '看书', '看视频'],
-					['做题', '看书', '看视频']
-				],
+				options3: [{
+					text: '为啥没完成呢?',
+					style: {
+						backgroundColor: 'rgb(255,58,49)'
+					}
+				}],
+				options4: [{
+					text: '很棒哦！继续努力',
+					style: {
+						backgroundColor: '#39B54A'
+					}
+				}],
+				subjects: ['数学', '英语', '专业课','政治'],
+				learnStyle:['做题', '背单词', '看书', '看视频'],
+					
 			}
 		},
 		onReady() {
@@ -86,6 +76,16 @@
 			})
 		},
 		methods: {
+			getDate(){
+				const date = new Date();
+				let year = date.getFullYear();
+				let month = date.getMonth() + 1;
+				let day = date.getDate();
+				month = month > 9 ? month : '0' + month;;
+				day = day > 9 ? day : '0' + day;
+					
+				return `${year}-${month}-${day}`;
+			},
 			bindClick(e) {
 				uni.showToast({
 					title: `点击了${e.content.text}按钮`,
@@ -102,7 +102,7 @@
 			swipeChange(e) {
 				console.log('返回：', e);
 			},
-			swipeClick(e, index) {
+			swipeClick(e, index, todoid) {
 				let {
 					content
 				} = e
@@ -113,45 +113,22 @@
 						success: (res) => {
 							if (res.confirm) {
 								this.todolist.splice(index, 1)
+								this.$emit("deleteTodoItem",todoid)
 							} else if (res.cancel) {
 								console.log('用户点击取消');
 							}
 						}
 					});
-				} else if (content.text === '添加') {
-					if (this.swipeList.length < 10) {
-						this.swipeList.push({
-							id: new Date().getTime(),
-							options: [{
-								text: '置顶'
-							}, {
-								text: '标记为已读',
-								style: {
-									backgroundColor: 'rgb(254,156,1)'
-								}
-							}, {
-								text: '删除',
-								style: {
-									backgroundColor: 'rgb(255,58,49)'
-								}
-							}],
-							content: '新增'
-						})
-						uni.showToast({
-							title: `添加了一条数据`,
-							icon: 'none'
-						})
-					} else {
-						uni.showToast({
-							title: `最多添加十条数据`,
-							icon: 'none'
-						})
-					}
-				} else {
+				} else if (content.text === '标记为已完成') {
+					this.todolist[index].isCompleted = 1
+					this.$emit("completeTodoItem",todoid)
 					uni.showToast({
-						title: `点击了${e.content.text}按钮`,
+						title: `哎吆，不错哦！`,
 						icon: 'none'
 					})
+				} else if (content.text === '撤销完成标记'){
+					this.todolist[index].isCompleted = 0
+					this.$emit("uncompleteTodoItem",todoid)
 				}
 
 			}
@@ -164,8 +141,8 @@
 
 	.cont {
 		flex: 1;
-		height: 45px;
-		line-height: 45px;
+		height: 60px;
+		line-height: 25px;
 		padding: 0 15px;
 		position: relative;
 		background-color: #fff;

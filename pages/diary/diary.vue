@@ -10,9 +10,10 @@
 		<view class="cu-timeline">
 			<view class="cu-time">昨天</view>
 			<view class="cu-item text-red" v-for="(item,index) in diarys">
-				<view class="content  shadow-blur bg-red">
+				<view class="content shadow-blur bg-red">
 					<view class="cu-avatar round" :style="[{backgroundImage:'url(../../../static/'+ (moods[item.moodId-1]) +'.png)'}]"></view>
 					<text style="margin-left: 5px;">{{item.created}}</text>
+					<text class="cuIcon-close" style="position: absolute; top: 5px; right: 7px;" @click="deleteDiary(index,item.id)"></text>
 					<view style="margin-left: 20px;">
 						{{item.content}}
 					</view>
@@ -31,6 +32,7 @@
 	import uniGrid from '@/components/uni-grid/uni-grid.vue'
 	import uniGridItem from '@/components/uni-grid-item/uni-grid-item.vue'
 	import mood from '@/pages/'
+	import { mapState } from "vuex"
 	export default {
 		components: {
 			uniPopup,
@@ -45,6 +47,9 @@
 		onShow() {
 			this.getDiarys()
 		},
+		computed:mapState({
+			userinfo: state => state.userinfo,
+		}),
 		data() {
 			return {
 				message: '',
@@ -85,15 +90,37 @@
 			}
 		},
 		methods: {
+			deleteDiary(index,diaryid){
+				uni.showModal({
+					title: '提示',
+					content: '是否删除',
+					success: (res) => {
+						if (res.confirm) {
+							this.diarys.splice(index, 1)
+							uni.request({
+								url:"https://www.doaho.work:8080/diary/delete?salt="+this.$store.state.userinfo['salt']+'&diaryid='+diaryid,
+								success: (res) => {
+									if(res.data.success){
+										console.info(res.data.message)
+									}								
+								}
+							})
+						} else if (res.cancel) {
+							console.log('用户点击取消');
+						}
+					}
+				});
+			},
 			toMood(){
 				uni.navigateTo({
-					url:"./moods/moods"
+					url:"./moods/moods",
+					
 				})
 			},
 			getDiarys(){
 				var _self = this;
 				uni.request({
-					url: 'https://www.doaho.work:8080/diary/get?salt=a', //请求接口
+					url: 'https://www.doaho.work:8080/diary/get?salt='+ this.userinfo['salt'], //请求接口
 					header: {
 						'content-type': 'application/x-www-form-urlencoded', //自定义请求头信息
 					},
