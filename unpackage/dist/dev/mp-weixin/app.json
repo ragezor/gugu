@@ -1,8 +1,10 @@
 {
   "pages": [
+    "pages/index/settings/settings",
+    "pages/index/settings/signature",
+    "pages/index/settings/back",
     "pages/index/team/team",
     "pages/index/team/no_team",
-    "pages/index/settings/settings",
     "pages/index/achieve/achieve",
     "pages/index/my/dairy",
     "pages/index/my/my",
