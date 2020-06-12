@@ -2,7 +2,6 @@
 	<view>
 		<view class=" bg-img  shadow-blur" style="background-image:url(../../static/bg_first.png)">
 			<cu-custom :isBack="true">
-				<block slot="backText">返回</block>
 				<block slot="content">不咕单</block>
 			</cu-custom>
 
@@ -208,12 +207,14 @@
 				direction: 'horizontal',
 				index: -1,
 				todolist: [],
+				BGZ: 0,
 				picker: ['考研', '四六级', '考证', '实习'],
 				//组合框
 				picker1: ['北京大学', '清华大学', '四川大学', '重庆大学'],
 				title: 'Hello',
 				words: '再不学习就只有继续当咸鱼咯',
 				scroll: 1,
+				scrollTime: '',
 				time: '12:01',
 				date: getDate({
 					format: true
@@ -230,20 +231,20 @@
 					buttonColor: '#007AFF'
 				},
 				content: [{
-						iconPath: '/static/component.png',
-						selectedIconPath: '/static/componentHL.png',
+						iconPath: '/static/task_active.png',
+						selectedIconPath: '/static/task_active.png',
 						text: '添加任务',
 						active: false
 					},
 					{
-						iconPath: '/static/api.png',
-						selectedIconPath: '/static/apiHL.png',
+						iconPath: '/static/diary_active.png',
+						selectedIconPath: '/static/diary_active.png',
 						text: '记录心情',
 						active: false
 					},
 					{
-						iconPath: '/static/template.png',
-						selectedIconPath: '/static/templateHL.png',
+						iconPath: '/static/target_active.png',
+						selectedIconPath: '/static/target_active.png',
 						text: '更改目标',
 						active: false
 					}
@@ -301,6 +302,7 @@
 				}
 			},
 			getTodolist(startTime) {
+				var _this = this
 				console.info('调用todolist/get接口')
 				this.todolist = []
 				uni.request({
@@ -310,7 +312,8 @@
 						'content-type': 'application/x-www-form-urlencoded', //自定义请求头信息
 					},
 					success: (res) => {
-						this.todolist = res.data.data;
+						_this.todolist = res.data.data;
+						_this.getBGK(startTime)
 					}
 				});
 				console.info("todolist" + this.todolist)
@@ -326,6 +329,7 @@
 					success: (res) => {
 						if (res.data.success) {
 							console.info(res.data)
+							_self.getBGK(_self.scrollTime)
 						}
 					}
 				})
@@ -341,11 +345,13 @@
 					success: (res) => {
 						if (res.data.success) {
 							console.info(todoid + "撤销标记")
+							_self.getBGK(_self.scrollTime)
 						}
 					}
 				})
 			},
 			deleteTodoItem(todoid) {
+				var _self = this
 				uni.request({
 					url: 'https://www.doaho.work:8080/todolist/delete?salt=' + this.userinfo['salt'] + '&todoid=' + todoid,
 					header: {
@@ -354,6 +360,7 @@
 					success: (res) => {
 						if (res.data.success) {
 							console.info(todoid + "清单删除")
+							_self.getBGK(_self.scrollTime)
 						}
 					}
 				})
@@ -372,10 +379,29 @@
 					},
 					success: function(res) {
 						if (res.data.success) {
-							let startTime = '2020-6-' + _this.scroll
+							const date = new Date();
+							let year = date.getFullYear();
+							let month = date.getMonth() + 1;
+							let day = _this.scroll;
+							let startTime = `${year}-${month}-${day}`
 							_this.getTodolist(startTime)
 							console.info('run here')
 						}
+					}
+				})
+			},
+			getBGK(date){
+				console.info('计算不咕值')
+				var _this = this
+				uni.request({
+					url: `https://www.doaho.work:8080/todolist/calBGZ?salt=${this.userinfo['salt']}&date=${date}&type=0`,
+					success: (res) => {
+						// TODO
+						// if (res.data.success) {
+						// 	console.info(todoid + "清单删除")
+						// }
+						console.info(res.data)
+						_this.BGZ = res.data.data==null?0:res.data.data
 					}
 				})
 			},
@@ -408,6 +434,16 @@
 			},
 			goBack() {
 				this.scroll = this.today
+			},
+			getWord(){
+				var _this = this
+				uni.request({
+					url:'https://v1.hitokoto.cn/?c=a&c=i&encode=text',
+					success:function(res){
+						console.info(res)
+						_this.word = res.data
+					}
+				})
 			}
 		},
 		computed: {
@@ -422,15 +458,17 @@
 			},
 			...mapState({
 				userinfo: state => state.userinfo
-			})
+			}),
 		},
 		watch: {
 			scroll(newV) {
-				// 调用todolist/get接口
-				//TODO startTime重新获取
-				let startTime = '2020-6-' + newV
+				const date = new Date();
+				let year = date.getFullYear();
+				let month = date.getMonth() + 1;
+				let startTime = `${year}-${month}-${newV}`
+				this.scrollTime = startTime
 				this.getTodolist(startTime);
-			}
+			},
 		},
 	}
 </script>

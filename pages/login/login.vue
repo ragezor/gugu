@@ -42,20 +42,6 @@
 					success: function(loginRes) {
 						let code = loginRes.code;
 						console.info(code)
-						// if (!_this.isCanUse) {
-						// 	//非第一次授权获取用户信息
-						// 	uni.getUserInfo({
-						// 		provider: 'weixin',
-						// 		success: function(infoRes) {
-						// 			//获取用户信息后向调用信息更新方法
-						// 			console.info(infoRes)
-						// 			let nickName = infoRes.userInfo.nickName; //昵称
-						// 			let avatarUrl = infoRes.userInfo.avatarUrl; //头像
-						// 			_this.updateUserInfo(); //调用更新信息方法
-						// 		}
-						// 	});
-						// }
-
 						//2.将用户登录code传递到后台置换用户SessionKey、OpenId等信息
 						uni.request({
 							url: 'https://www.doaho.work:8080/user/login',

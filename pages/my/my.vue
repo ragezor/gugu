@@ -2,7 +2,7 @@
 	<view class=" content">
 		<view class="bg-img" style="background-image: url(../../../static/bg_me.png)">
 			<cu-custom :isBack="true">
-				<block slot="backText">返回</block>
+				<!-- <block slot="backText">返回</block> -->
 				<block slot="content">导航栏</block>
 			</cu-custom>
 

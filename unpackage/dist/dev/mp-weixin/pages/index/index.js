@@ -103,7 +103,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   uniFab: function() {
-    return __webpack_require__.e(/*! import() | components/uni-fab/uni-fab */ "components/uni-fab/uni-fab").then(__webpack_require__.bind(null, /*! @/components/uni-fab/uni-fab.vue */ 78))
+    return __webpack_require__.e(/*! import() | components/uni-fab/uni-fab */ "components/uni-fab/uni-fab").then(__webpack_require__.bind(null, /*! @/components/uni-fab/uni-fab.vue */ 84))
   }
 }
 var render = function() {
@@ -316,8 +316,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var todolist2 = function todolist2() {__webpack_require__.e(/*! require.ensure | components/itemList/itemList1 */ "components/itemList/itemList1").then((function () {return resolve(__webpack_require__(/*! @/components/itemList/itemList1 */ 85));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var todolist1 = function todolist1() {__webpack_require__.e(/*! require.ensure | components/itemList/itemList */ "components/itemList/itemList").then((function () {return resolve(__webpack_require__(/*! @/components/itemList/itemList */ 92));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var fab = function fab() {__webpack_require__.e(/*! require.ensure | components/uni-fab/uni-fab */ "components/uni-fab/uni-fab").then((function () {return resolve(__webpack_require__(/*! @/components/uni-fab/uni-fab.vue */ 78));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var todolist2 = function todolist2() {__webpack_require__.e(/*! require.ensure | components/itemList/itemList1 */ "components/itemList/itemList1").then((function () {return resolve(__webpack_require__(/*! @/components/itemList/itemList1 */ 91));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var todolist1 = function todolist1() {__webpack_require__.e(/*! require.ensure | components/itemList/itemList */ "components/itemList/itemList").then((function () {return resolve(__webpack_require__(/*! @/components/itemList/itemList */ 98));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var fab = function fab() {__webpack_require__.e(/*! require.ensure | components/uni-fab/uni-fab */ "components/uni-fab/uni-fab").then((function () {return resolve(__webpack_require__(/*! @/components/uni-fab/uni-fab.vue */ 84));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
 
@@ -364,12 +363,14 @@ function getDate(type) {
       direction: 'horizontal',
       index: -1,
       todolist: [],
+      BGZ: 0,
       picker: ['考研', '四六级', '考证', '实习'],
       //组合框
       picker1: ['北京大学', '清华大学', '四川大学', '重庆大学'],
       title: 'Hello',
       words: '再不学习就只有继续当咸鱼咯',
       scroll: 1,
+      scrollTime: '',
       time: '12:01',
       date: getDate({
         format: true }),
@@ -386,20 +387,20 @@ function getDate(type) {
         buttonColor: '#007AFF' },
 
       content: [{
-        iconPath: '/static/component.png',
-        selectedIconPath: '/static/componentHL.png',
+        iconPath: '/static/task_active.png',
+        selectedIconPath: '/static/task_active.png',
         text: '添加任务',
         active: false },
 
       {
-        iconPath: '/static/api.png',
-        selectedIconPath: '/static/apiHL.png',
+        iconPath: '/static/diary_active.png',
+        selectedIconPath: '/static/diary_active.png',
         text: '记录心情',
         active: false },
 
       {
-        iconPath: '/static/template.png',
-        selectedIconPath: '/static/templateHL.png',
+        iconPath: '/static/target_active.png',
+        selectedIconPath: '/static/target_active.png',
         text: '更改目标',
         active: false }] };
 
@@ -456,7 +457,8 @@ function getDate(type) {
         this.modalName = 'DialogModal1';
       }
     },
-    getTodolist: function getTodolist(startTime) {var _this2 = this;
+    getTodolist: function getTodolist(startTime) {
+      var _this = this;
       console.info('调用todolist/get接口');
       this.todolist = [];
       uni.request({
@@ -466,7 +468,8 @@ function getDate(type) {
           'content-type': 'application/x-www-form-urlencoded' //自定义请求头信息
         },
         success: function success(res) {
-          _this2.todolist = res.data.data;
+          _this.todolist = res.data.data;
+          _this.getBGK(startTime);
         } });
 
       console.info("todolist" + this.todolist);
@@ -482,6 +485,7 @@ function getDate(type) {
         success: function success(res) {
           if (res.data.success) {
             console.info(res.data);
+            _self.getBGK(_self.scrollTime);
           }
         } });
 
@@ -497,11 +501,13 @@ function getDate(type) {
         success: function success(res) {
           if (res.data.success) {
             console.info(todoid + "撤销标记");
+            _self.getBGK(_self.scrollTime);
           }
         } });
 
     },
     deleteTodoItem: function deleteTodoItem(todoid) {
+      var _self = this;
       uni.request({
         url: 'https://www.doaho.work:8080/todolist/delete?salt=' + this.userinfo['salt'] + '&todoid=' + todoid,
         header: {
@@ -510,6 +516,7 @@ function getDate(type) {
         success: function success(res) {
           if (res.data.success) {
             console.info(todoid + "清单删除");
+            _self.getBGK(_self.scrollTime);
           }
         } });
 
@@ -528,10 +535,29 @@ function getDate(type) {
 
         success: function success(res) {
           if (res.data.success) {
-            var startTime = '2020-6-' + _this.scroll;
+            var date = new Date();
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = _this.scroll;
+            var startTime = "".concat(year, "-").concat(month, "-").concat(day);
             _this.getTodolist(startTime);
             console.info('run here');
           }
+        } });
+
+    },
+    getBGK: function getBGK(date) {
+      console.info('计算不咕值');
+      var _this = this;
+      uni.request({
+        url: "https://www.doaho.work:8080/todolist/calBGZ?salt=".concat(this.userinfo['salt'], "&date=").concat(date, "&type=0"),
+        success: function success(res) {
+          // TODO
+          // if (res.data.success) {
+          // 	console.info(todoid + "清单删除")
+          // }
+          console.info(res.data);
+          _this.BGZ = res.data.data == null ? 0 : res.data.data;
         } });
 
     },
@@ -564,6 +590,16 @@ function getDate(type) {
     },
     goBack: function goBack() {
       this.scroll = this.today;
+    },
+    getWord: function getWord() {
+      var _this = this;
+      uni.request({
+        url: 'https://v1.hitokoto.cn/?c=a&c=i&encode=text',
+        success: function success(res) {
+          console.info(res);
+          _this.word = res.data;
+        } });
+
     } },
 
   computed: _objectSpread({
@@ -582,9 +618,11 @@ function getDate(type) {
 
   watch: {
     scroll: function scroll(newV) {
-      // 调用todolist/get接口
-      //TODO startTime重新获取
-      var startTime = '2020-6-' + newV;
+      var date = new Date();
+      var year = date.getFullYear();
+      var month = date.getMonth() + 1;
+      var startTime = "".concat(year, "-").concat(month, "-").concat(newV);
+      this.scrollTime = startTime;
       this.getTodolist(startTime);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
