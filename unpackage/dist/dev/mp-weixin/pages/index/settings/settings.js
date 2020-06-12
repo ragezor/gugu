@@ -250,9 +250,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
 {
   components: { uniList: uniList, uniListItem: uniListItem },
   data: function data() {

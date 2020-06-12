@@ -151,20 +151,126 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
     return {
-      team_name: '小程序我们已经鸽了' };
+      team_name: '小程序我们已经鸽了',
+      modalName: null };
 
   },
   methods: {
     onShareAppMessage: function onShareAppMessage(e) {
-      var title = '快来学习！';
+      var title = '快来一起学习吧！';
       return {
         title: title,
         path: 'pages/index/team/team' };
 
+    },
+    showModal1: function showModal1(e) {
+      this.modalName = "DialogModal1";
+    },
+    showModal2: function showModal2(e) {
+      this.modalName = "DialogModal2";
+    },
+    showModal3: function showModal3(e) {
+      this.modalName = "DialogModal3";
+    },
+    hideModal: function hideModal(e) {
+      this.modalName = null;
+    },
+    onInput: function onInput(e) {
+      this.$emit('input', e.detail.value);
     } } };exports.default = _default;
 
 /***/ })

@@ -1,9 +1,17 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-	{
-	    "path" : "pages/index/settings/settings",
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages{
+		{
+		    "path" : "pages/index/team/team",
+		    "style" : {"navigationBarTitleText": "uni-app"}
+		},
+		{
+		    "path" : "pages/index/settings/settings",
+		    "style" : {"navigationBarTitleText": "uni-app"}
+		},
+	    {"path" :"pages/index/my/new_my",
 	    "style" : {"navigationBarTitleText": "uni-app"}
 	},
+	
 	{
 	    "path" : "pages/index/settings/signature",
 	    "style" : {"navigationBarTitleText": "uni-app"}
@@ -13,19 +21,13 @@
 	    "style" : {"navigationBarTitleText": "uni-app"}
 	},
 	
-	{
-	    "path" : "pages/index/team/team",
-	    "style" : {"navigationBarTitleText": "uni-app"}
-	},
+	
 	{
 	    "path" : "pages/index/team/no_team",
 	    "style" : {"navigationBarTitleText": "uni-app"}
 	},
 	
-	{
-	    "path" : "pages/index/achieve/achieve",
-	    "style" : {"navigationBarTitleText": "uni-app"}
-	},
+	
 	
 		{
 		    "path" : "pages/index/my/dairy",

@@ -1,0 +1,14 @@
+
+#btn1{
+	background-size: cover;
+}
+.block{
+	height: 30px;
+}
+.text-grey{
+	font-size: 13px;
+}
+.box{
+	height: 75px;
+}
+

@@ -6,7 +6,7 @@
 		<block slot="content">我的小组</block>
 	</cu-custom>
 	</view>
-	<view class=" flex justify-center align-end margin-top">
+	<view class=" flex justify-around align-end margin-top">
 		<view class="cu-avatar radius xl margin-left bg-white" style="background-image:url(../../../static/me_team.png);"></view>
 	     <view>
 			 <view class="flex justify-center align-start"><text class="light text-pink">{{team_name}}</text></view>
@@ -16,7 +16,97 @@
 		 <view class="cu-avatar radius lg margin-left bg-white margin-top" style="background-image:url(../../../static/D99BF290B33967FFC81E18410C8F6FF3.jpg);"></view>
 		 </view>
 	</view> 
-	<button class="cu-btn share-btn block light bg-blue margin-tb-sm lg "open-type="share" >召唤鸽子</button>
+	<button class="cu-btn share-btn block light bg-red margin-tb-sm lg "open-type="share" >召唤鸽子</button>
+	<button class="cu-btn  block light bg-red margin-tb-sm lg " @click="showModal3" data-target="DialogModal3">创建队伍</button>
+	<button class="cu-btn  block light bg-red margin-tb-sm lg " >加入队伍</button>
+	<button class="cu-btn  block light bg-red margin-tb-sm lg " >退出队伍</button>
+	
+	<view class="flex justify-around margin-top">
+			<button class="cu-btn  lg  bg-gray bg-img shadow" style="width:150px;height:150px;background-image: url(../../../static/bird/橙鸽子.png)"@click="showModal1" :data-target="DialogModal"></button>
+	</view>
+	<view class="flex justify-around al">
+		<button class="cu-btn  lg   bg-gray bg-img shadow" style="width:100px;height:100px;background-image: url(../../../static/bird/橙鸽子.png)" @click="showModal1" :data-target="DialogModal"></button>
+		<button class="cu-btn  lg  bg-gray bg-img shadow" style="width:100px;height:100px;background-image: url(../../../static/bird/橙鸽子.png)" ></button>
+	</view>
+	<view class="cu-modal" :class="modalName=='DialogModal1'?'show':''">
+		<view class="cu-dialog">
+			<view class="cu-bar bg-white justify-end">
+				<view class="content text-sm">你要干啥</view>
+				<view class="action" @tap="hideModal">
+					<text class="cuIcon-close text-red"></text>
+				</view>
+			</view>
+		<view class="cu-form-group margin-top">
+			
+			
+			<button class="cu-btn lg " @click="showModal2" data-target="DialogModal2">
+					<text class="cuIcon-baby">喂养</text>
+					
+				</button>
+				<button class="cu-btn ">
+						<text class="cuIcon-calendar">清单</text>
+					</button>
+					<button class="cu-btn ">
+							<text class="cuIcon-text">鸽子信息</text>
+						</button>
+		</view>
+			<view class="cu-bar bg-white justify-end">
+				<view class="action">
+					<button class="cu-btn line-green text-green" @tap="hideModal">取消</button>
+					<button class="cu-btn bg-green margin-left" @tap="hideModal">确定</button>
+	
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="cu-modal" :class="modalName=='DialogModal2'?'show':''">
+		<view class="cu-dialog">
+			<view class="cu-bar bg-white justify-end">
+				<view class="content text-sm">喂鸽子多少呢</view>
+				<view class="action" @tap="hideModal">
+					<text class="cuIcon-close text-red"></text>
+				</view>
+			</view>
+		<view class="cu-form-group margin-top">
+			<input name="test" style="border: solid 1px #999999;" type="text" @input="onInput" :value="value" placeholder="50g" />
+			
+			
+			
+		</view>
+			<view class="cu-bar bg-white justify-end">
+				<view class="action">
+					<button class="cu-btn line-green text-green" @tap="hideModal">取消</button>
+					<button class="cu-btn bg-green margin-left" @tap="hideModal">确定</button>
+	
+				</view>
+			</view>
+		</view>
+	</view>
+	
+	<view class="cu-modal" :class="modalName=='DialogModal3'?'show':''">
+		<view class="cu-dialog">
+			<view class="cu-bar bg-white justify-end">
+				<view class="content text-sm">创建个队伍吧</view>
+				<view class="action" @tap="hideModal">
+					<text class="cuIcon-close text-red"></text>
+				</view>
+			</view>
+		<view class="cu-form-group margin-top">
+			<text>队伍名字</text>
+			<input name="test" style="border: solid 1px #999999;" type="text" @input="onInput" :value="value" placeholder="我们都爱咕咕咕" />
+			
+			
+			
+		</view>
+			<view class="cu-bar bg-white justify-end">
+				<view class="action">
+					<button class="cu-btn  line-green text-green" @tap="hideModal">取消</button>
+					<button class="cu-btn  share-btn  line-green text-green" @tap="hideModal" open-type="share">确定</button>
+	
+				</view>
+			</view>
+		</view>
+	</view>
 	</view>
 </template>
 
@@ -25,16 +115,32 @@
 		data() {
 			return{
 				team_name:'小程序我们已经鸽了',
+				modalName: null,
 			}
 			},
 			methods:{
 				onShareAppMessage: function(e) {
-								let title = '快来学习！'
+								let title = '快来一起学习吧！'
 								return {
 									title: title,
 									path: 'pages/index/team/team'
 								}
-							}
+							},
+							showModal1(e) {
+								this.modalName = "DialogModal1"
+							},
+							showModal2(e) {
+								this.modalName = "DialogModal2"
+							},
+							showModal3(e) {
+								this.modalName = "DialogModal3"
+							},
+							hideModal(e) {
+								this.modalName = null
+							},
+							onInput(e) {
+							                this.$emit('input', e.detail.value)  
+							            }  ,
 			
 			}
 		}

@@ -3,7 +3,7 @@
 	<view class="bg-img"style="background-image: url(../../../static/bg_me.png)">
 	<cu-custom :isBack="true">
 		<block slot="backText">返回</block>
-		<block slot="content">我的设置</block>
+		<block slot="content" >我的设置</block>
 	</cu-custom>
 	
 	<view class="cu-modal" :class="modalName=='DialogModal1'?'show':''">
@@ -21,11 +21,8 @@
 					{{index1>-1?picker1[index1]:'你要干啥'}}
 				</view>
 			</picker>
-			<picker @change="PickerChange2" :value="index2" :range="picker2">
-				<view class="picker">
-					{{index2>-1?picker2[index2]:'目标院校'}}
-				</view>
-			</picker>
+			<input name="test" style="border: solid 1px #999999;" type="text" @input="onInput" :value="value" placeholder="目标院校" />
+			<!-- 这个submit参考https://uniapp.dcloud.io/component/form 因为小程序有一点点不一样 -->
 			
 			<input name="test" style="border: solid 1px #999999;" type="text" @input="onInput" :value="value" placeholder="详细说说" />
 			
