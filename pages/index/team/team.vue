@@ -43,10 +43,10 @@
 					<text class="cuIcon-baby">喂养</text>
 					
 				</button>
-				<button class="cu-btn ">
+				<button class="cu-btn "@click="showModal4" data-target="DialogModal4">
 						<text class="cuIcon-calendar">清单</text>
 					</button>
-					<button class="cu-btn ">
+					<button class="cu-btn " @click="showModal5" data-target="DialogModal5">
 							<text class="cuIcon-text">鸽子信息</text>
 						</button>
 		</view>
@@ -107,15 +107,82 @@
 			</view>
 		</view>
 	</view>
+<!-- 	DialogModal4完成点击鸽子查看别人的清单 更改object以更改绑定的数据 -->
+	<view class="cu-modal" :class="modalName=='DialogModal4'?'show':''">
+		<view class="cu-dialog">
+			<view class="cu-bar bg-white justify-end">
+				<view class="content text-sm">清单信息</view>
+				<view class="action" @tap="hideModal">
+					<text class="cuIcon-close text-red"></text>
+				</view>
+			</view>
+		<view class=" margin-top">
+			<uni-list>
+				<view v-for="(value, name) in object">
+			<uni-list-item :title="name" :show-badge="true" :badge-text="value"></uni-list-item>
+			</view>
+			</uni-list>
+			
+		</view>
+			<view class="cu-bar bg-white justify-end">
+				<view class="action">
+					<button class="cu-btn  line-green text-green" @tap="hideModal">取消</button>
+					<button class="cu-btn    line-green text-green" @tap="hideModal" >确定</button>
+	
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="cu-modal" :class="modalName=='DialogModal5'?'show':''">
+		<view class="cu-dialog">
+			<view class="cu-bar bg-white justify-end">
+				<view class="content text-sm">清单信息</view>
+				<view class="action" @tap="hideModal">
+					<text class="cuIcon-close text-red"></text>
+				</view>
+			</view>
+		<view class=" margin-top">
+			<uni-list>
+				<view v-for="(value, name) in gugu">
+			<uni-list-item :title="name" :show-badge="true" :badge-text="value"></uni-list-item>
+			</view>
+			</uni-list>
+			
+		</view>
+			<view class="cu-bar bg-white justify-end">
+				<view class="action">
+					<button class="cu-btn  line-green text-green" @tap="hideModal">取消</button>
+					<button class="cu-btn    line-green text-green" @tap="hideModal" >确定</button>
+	
+				</view>
+			</view>
+		</view>
+	</view>
+	
 	</view>
 </template>
 
 <script>
+	import uniList from "@/components/uni-list/uni-list.vue"
+	import uniListItem from "@/components/uni-list-item/uni-list-item.vue"
+	
 	export default {
+		components: {uniList,uniListItem},
 		data() {
 			return{
 				team_name:'小程序我们已经鸽了',
 				modalName: null,
+				object: {
+				      '数学': '完成',
+					  '英语': '咕了',
+					  '政治': '完成',
+					  '专业课': '完成',
+				     
+				    },
+					gugu:{
+						'体重':'100g',
+						'等级':'1级',
+					}
 			}
 			},
 			methods:{
@@ -134,6 +201,12 @@
 							},
 							showModal3(e) {
 								this.modalName = "DialogModal3"
+							},
+							showModal4(e) {
+								this.modalName = "DialogModal4"
+							},
+							showModal5(e) {
+								this.modalName = "DialogModal5"
 							},
 							hideModal(e) {
 								this.modalName = null
