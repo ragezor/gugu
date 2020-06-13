@@ -22,11 +22,13 @@
 	<button class="cu-btn  block light bg-red margin-tb-sm lg " >退出队伍</button>
 	
 	<view class="flex justify-around margin-top">
-			<button class="cu-btn  lg  bg-gray bg-img shadow" style="width:150px;height:150px;background-image: url(../../../static/bird/橙鸽子.png)"@click="showModal1" :data-target="DialogModal"></button>
+		
+			<button class="cu-btn  lg  bg-gray bg-img shadow" style="width:150px;height:150px;background-image: url(../../../static/bird/橙鸽子.png)"@click="showModal1" :data-target="DialogModal"><view class=' bg-green cu-tag badge '>{{member_name_1}}</view></button>
 	</view>
 	<view class="flex justify-around al">
-		<button class="cu-btn  lg   bg-gray bg-img shadow" style="width:100px;height:100px;background-image: url(../../../static/bird/橙鸽子.png)" @click="showModal1" :data-target="DialogModal"></button>
-		<button class="cu-btn  lg  bg-gray bg-img shadow" style="width:100px;height:100px;background-image: url(../../../static/bird/橙鸽子.png)" ></button>
+		<button class="cu-btn  lg   bg-gray bg-img shadow" style="width:100px;height:100px;background-image: url(../../../static/bird/橙鸽子.png)" @click="showModal1" :data-target="DialogModal"><view class=' bg-green cu-tag badge '>{{member_name_2}}</view></button>
+		<button class="cu-btn  lg   bg-gray bg-img shadow" style="width:100px;height:100px;background-image: url(../../../static/bird/橙鸽子.png)" @click="showModal1" :data-target="DialogModal"><view class=' bg-green cu-tag badge '>{{member_name_3}}</view></button>
+
 	</view>
 	<view class="cu-modal" :class="modalName=='DialogModal1'?'show':''">
 		<view class="cu-dialog">
@@ -59,6 +61,7 @@
 			</view>
 		</view>
 	</view>
+<!-- 	此模态框里的图片对应点击事件进行更新 -->
 	<view class="cu-modal" :class="modalName=='DialogModal2'?'show':''">
 		<view class="cu-dialog">
 			<view class="cu-bar bg-white justify-end">
@@ -107,7 +110,7 @@
 			</view>
 		</view>
 	</view>
-<!-- 	DialogModal4完成点击鸽子查看别人的清单 更改object以更改绑定的数据 -->
+<!-- 	DialogModal4完成点击鸽子查看别人的清单 更改object数组以更改绑定的数据 -->
 	<view class="cu-modal" :class="modalName=='DialogModal4'?'show':''">
 		<view class="cu-dialog">
 			<view class="cu-bar bg-white justify-end">
@@ -133,6 +136,8 @@
 			</view>
 		</view>
 	</view>
+<!-- 	DialogModal5完成点击鸽子查看鸽子的信息，包括等级体重， 更改gugu数组以更改绑定的数据 -->
+	
 	<view class="cu-modal" :class="modalName=='DialogModal5'?'show':''">
 		<view class="cu-dialog">
 			<view class="cu-bar bg-white justify-end">
@@ -163,6 +168,7 @@
 </template>
 
 <script>
+	// 引入uni-list更是新内容
 	import uniList from "@/components/uni-list/uni-list.vue"
 	import uniListItem from "@/components/uni-list-item/uni-list-item.vue"
 	
@@ -172,6 +178,11 @@
 			return{
 				team_name:'小程序我们已经鸽了',
 				modalName: null,
+				member_name_1:'霍云杰',
+				member_name_2:'咕咕',
+				member_name_3:'咕',
+				
+				// 更新两个数组内容,对应清单完成情况和鸽子情况
 				object: {
 				      '数学': '完成',
 					  '英语': '咕了',

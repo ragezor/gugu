@@ -304,12 +304,23 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
+
+
+
 {
   components: { uniList: uniList, uniListItem: uniListItem },
   data: function data() {
     return {
       team_name: '小程序我们已经鸽了',
       modalName: null,
+      member_name_1: '霍云杰',
+      member_name_2: '咕咕',
+      member_name_3: '咕',
+
+      // 更新两个数组内容,对应清单完成情况和鸽子情况
       object: {
         '数学': '完成',
         '英语': '咕了',
