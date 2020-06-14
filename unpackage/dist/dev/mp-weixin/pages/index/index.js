@@ -102,8 +102,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
+  uniCombox: function() {
+    return __webpack_require__.e(/*! import() | components/uni-combox/uni-combox */ "components/uni-combox/uni-combox").then(__webpack_require__.bind(null, /*! @/components/uni-combox/uni-combox.vue */ 130))
+  },
   uniFab: function() {
-    return __webpack_require__.e(/*! import() | components/uni-fab/uni-fab */ "components/uni-fab/uni-fab").then(__webpack_require__.bind(null, /*! @/components/uni-fab/uni-fab.vue */ 84))
+    return __webpack_require__.e(/*! import() | components/uni-fab/uni-fab */ "components/uni-fab/uni-fab").then(__webpack_require__.bind(null, /*! @/components/uni-fab/uni-fab.vue */ 137))
   }
 }
 var render = function() {
@@ -306,17 +309,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var todolist2 = function todolist2() {__webpack_require__.e(/*! require.ensure | components/itemList/itemList1 */ "components/itemList/itemList1").then((function () {return resolve(__webpack_require__(/*! @/components/itemList/itemList1 */ 91));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var todolist1 = function todolist1() {__webpack_require__.e(/*! require.ensure | components/itemList/itemList */ "components/itemList/itemList").then((function () {return resolve(__webpack_require__(/*! @/components/itemList/itemList */ 98));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var fab = function fab() {__webpack_require__.e(/*! require.ensure | components/uni-fab/uni-fab */ "components/uni-fab/uni-fab").then((function () {return resolve(__webpack_require__(/*! @/components/uni-fab/uni-fab.vue */ 84));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var todolist2 = function todolist2() {__webpack_require__.e(/*! require.ensure | components/itemList/itemList1 */ "components/itemList/itemList1").then((function () {return resolve(__webpack_require__(/*! @/components/itemList/itemList1 */ 144));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var todolist1 = function todolist1() {__webpack_require__.e(/*! require.ensure | components/itemList/itemList */ "components/itemList/itemList").then((function () {return resolve(__webpack_require__(/*! @/components/itemList/itemList */ 151));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var fab = function fab() {__webpack_require__.e(/*! require.ensure | components/uni-fab/uni-fab */ "components/uni-fab/uni-fab").then((function () {return resolve(__webpack_require__(/*! @/components/uni-fab/uni-fab.vue */ 137));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
 
@@ -344,6 +337,15 @@ function getDate(type) {
     fab: fab },
 
   onLoad: function onLoad() {
+    var _this = this;
+    uni.request({
+      url: 'https://v1.hitokoto.cn/?c=a&c=b&encode=json',
+      success: function success(res) {
+        _this.words = res.data.hitokoto;
+      } });
+
+  },
+  onShow: function onShow() {
     console.info('index onLoad');
     var date = new Date();
     var startTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
@@ -395,7 +397,7 @@ function getDate(type) {
       {
         iconPath: '/static/diary_active.png',
         selectedIconPath: '/static/diary_active.png',
-        text: '记录心情',
+        text: '心情',
         active: false },
 
       {
@@ -408,6 +410,18 @@ function getDate(type) {
 
   },
   methods: {
+    updateTarget: function updateTarget() {
+      uni.request({
+        url: "https://www.doaho.work:8080/user/update?salt=".concat(this.userinfo['salt']),
+        method: "POST",
+        data: {
+          "target": this.userinfo['target'] },
+
+        success: function success(res) {
+          console.info(res.data.message);
+        } });
+
+    },
     clearInput: function clearInput(event) {
       this.inputClearValue = event.detail.value;
       if (event.detail.value.length > 0) {
@@ -531,7 +545,8 @@ function getDate(type) {
           "startTime": this.date + ' ' + this.time + ':00',
           "content": this.inputClearValue,
           "subjectId": this.multiIndex[0] + 1,
-          "learnStyleId": this.multiIndex[0] == 1 ? this.multiIndex[1] + 1 : this.multiIndex[1] == 0 ? 1 : this.multiIndex[1] + 2 },
+          "learnStyleId": this.multiIndex[0] == 1 ? this.multiIndex[1] + 1 : this.multiIndex[1] == 0 ? 1 : this.multiIndex[
+          1] + 2 },
 
         success: function success(res) {
           if (res.data.success) {

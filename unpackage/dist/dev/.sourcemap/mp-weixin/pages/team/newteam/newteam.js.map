@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///C:/Users/24604/Desktop/小程序/gugu/main.js"],"names":["createPage","Page"],"mappings":";;;;;;;;;;kDAAA;AACA;AACA,wG;AACAA,UAAU,CAACC,gBAAD,CAAV,C","file":"pages/team/newteam/newteam.js","sourcesContent":["import 'uni-pages';\nimport Vue from 'vue'\nimport Page from './pages/team/newteam/newteam.vue'\ncreatePage(Page)"],"sourceRoot":""}

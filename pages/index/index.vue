@@ -1,8 +1,8 @@
 <template>
 	<view>
-		<view class=" bg-img  shadow-blur" style="background-image:url(../../static/bg_first.png)">
-			<cu-custom :isBack="true">
-				<block slot="content">不咕单</block>
+		<view class=" bg-img  shadow-blur" style="background-image:url(static/bg_first.png)">
+			<cu-custom>
+				<block slot="content"><text class="text-white" style="font-weight: bold;">不咕单</text></block>
 			</cu-custom>
 
 			<view class="flex justify-end   text-xl  solid-bottom padding ">
@@ -14,7 +14,7 @@
 
 			</view>
 
-			<view class="flex  justify-center solid-bottom text-white text-shadow">
+			<view class="flex  justify-center solid-bottom text-white" style="padding: 0 15px;">
 				{{words}}
 			</view>
 		</view>
@@ -27,51 +27,41 @@
 		</scroll-view>
 		<view class="cuIcon-time text-center" @click="goBack">{{new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+new Date().getDate()}}
 			不咕值:{{BGZ}}</view>
-		<view class="flex align-center justify-center margin-top">
+		<view v-if="userinfo['target']==null" class="flex align-center justify-center margin-top">
 			<view class="text-yellow text-sm ">常立志更要立长志，来为自己设定一个目标吧！</view>
-
-			<button class="cu-btn cuIcon  lg bg-img shadow" style="background-image: url(../../static/first_newGoal.png)" @tap="showModal"
+			<button class="cu-btn cuIcon  lg bg-img shadow" style="background-image: url(static/first_newGoal.png)" @tap="showModal"
 			 data-target="DialogModal1"></button>
+		</view>
+		<view v-else class="flex align-center justify-center margin-top">
+			<view class="text-yellow text-sm ">目标: {{userinfo['target']}}</view>
 		</view>
 		<view class="cu-modal" :class="modalName=='DialogModal1'?'show':''">
 			<view class="cu-dialog">
 				<view class="cu-bar bg-white justify-end">
-					<view class="content">先给自己定一个小目标</view>
+					<view class="content">先定一个目标院校</view>
 					<view class="action" @tap="hideModal">
 						<text class="cuIcon-close text-red"></text>
 					</view>
 				</view>
 				<view class="padding-xl">
 					<view class="col-3">
-						<view class="cu-form-group margin-top">
-							<view class="title">你要干啥</view>
-							<picker @change="PickerChange" :value="index" :range="picker">
-								<view class="picker">
-									{{index>-1?picker[index]:'考研'}}
-								</view>
-							</picker>
+						<view class="cu-form-group example-body">
+							<uni-combox label="目标院校" labelWidth="80px" placeholder="请填写目标院校" v-model="userinfo['target']" emptyTips="GO!GO!GO"></uni-combox>
 						</view>
-						<view class="cu-form-group">
+						<!-- <view class="cu-form-group">
 							<view class="title">目标院校</view>
 							<picker @change="PickerChange" :value="index" :range="picker1">
 								<view class="picker">
 									{{index>-1?picker1[index]:'北京大学'}}
 								</view>
 							</picker>
-						</view>
-						<view class="cu-form-group">
-							<view class="flex justify-between ">
-								<view class="title">详细说说吧</view>
-								<input placeholder="我要上北大!" name="input"></input>
-							</view>
-						</view>
-
+						</view> -->
 					</view>
 				</view>
 				<view class="cu-bar bg-white justify-end">
 					<view class="action">
 						<button class="cu-btn line-grey text-green" @tap="hideModal">取消</button>
-						<button class="cu-btn bg-pink margin-left" @tap="hideModal">确定</button>
+						<button class="cu-btn bg-pink margin-left" @tap="hideModal" @click="updateTarget">确定</button>
 
 					</view>
 				</view>
@@ -79,10 +69,10 @@
 		</view>
 		<!-- <todolist1 :todolist='todolist' :today='today' :scroll='scroll' @completeTodoItem="completeTodoItem"
 		 @uncompleteTodoItem="uncompleteTodoItem" @deleteTodoItem="deleteTodoItem"></todolist1> -->
-	<!-- 	todolist2 -->
-		<todolist2 :todolist="todolist" @completeTodoItem="completeTodoItem"
-		 @uncompleteTodoItem="uncompleteTodoItem" @deleteTodoItem="deleteTodoItem"></todolist2>
-<!-- 
+		<!-- 	todolist2 -->
+		<todolist2 :todolist="todolist" @completeTodoItem="completeTodoItem" @uncompleteTodoItem="uncompleteTodoItem"
+		 @deleteTodoItem="deleteTodoItem"></todolist2>
+		<!-- 
 		<view class="flex justify-end margin-top"> <button class="cu-btn cuIcon bg-img shadow xxl" style="background-image: url(../../static/first_newTodo.png)"
 			 @tap="showModal" data-target="DialogModal2"></button>
 		</view> -->
@@ -188,6 +178,15 @@
 			fab
 		},
 		onLoad() {
+			var _this = this
+			uni.request({
+				url: 'https://v1.hitokoto.cn/?c=a&c=b&encode=json',
+				success: (res) => {
+					_this.words = res.data.hitokoto
+				}
+			})
+		},
+		onShow() {
 			console.info('index onLoad')
 			let date = new Date();
 			let startTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
@@ -239,7 +238,7 @@
 					{
 						iconPath: '/static/diary_active.png',
 						selectedIconPath: '/static/diary_active.png',
-						text: '记录心情',
+						text: '心情',
 						active: false
 					},
 					{
@@ -252,6 +251,18 @@
 			}
 		},
 		methods: {
+			updateTarget() {
+				uni.request({
+					url: `https://www.doaho.work:8080/user/update?salt=${this.userinfo['salt']}`,
+					method: "POST",
+					data: {
+						"target": this.userinfo['target']
+					},
+					success: (res) => {
+						console.info(res.data.message)
+					}
+				})
+			},
 			clearInput: function(event) {
 				this.inputClearValue = event.detail.value;
 				if (event.detail.value.length > 0) {
@@ -372,10 +383,11 @@
 					url: 'https://www.doaho.work:8080/todolist/add?salt=' + this.userinfo['salt'],
 					method: 'POST',
 					data: {
-						"startTime": this.date+' '+this.time+':00',
+						"startTime": this.date + ' ' + this.time + ':00',
 						"content": this.inputClearValue,
-						"subjectId": this.multiIndex[0]+1,
-						"learnStyleId": this.multiIndex[0]==1 ? this.multiIndex[1]+1 : (this.multiIndex[1]==0 ? 1 : (this.multiIndex[1]+2))
+						"subjectId": this.multiIndex[0] + 1,
+						"learnStyleId": this.multiIndex[0] == 1 ? this.multiIndex[1] + 1 : (this.multiIndex[1] == 0 ? 1 : (this.multiIndex[
+							1] + 2))
 					},
 					success: function(res) {
 						if (res.data.success) {
@@ -390,7 +402,7 @@
 					}
 				})
 			},
-			getBGK(date){
+			getBGK(date) {
 				console.info('计算不咕值')
 				var _this = this
 				uni.request({
@@ -401,7 +413,7 @@
 						// 	console.info(todoid + "清单删除")
 						// }
 						console.info(res.data)
-						_this.BGZ = res.data.data==null?0:res.data.data
+						_this.BGZ = res.data.data == null ? 0 : res.data.data
 					}
 				})
 			},
@@ -435,11 +447,11 @@
 			goBack() {
 				this.scroll = this.today
 			},
-			getWord(){
+			getWord() {
 				var _this = this
 				uni.request({
-					url:'https://v1.hitokoto.cn/?c=a&c=i&encode=text',
-					success:function(res){
+					url: 'https://v1.hitokoto.cn/?c=a&c=i&encode=text',
+					success: function(res) {
 						console.info(res)
 						_this.word = res.data
 					}

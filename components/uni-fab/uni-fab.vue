@@ -33,7 +33,7 @@
 		  'uni-fab__circle--rightTop': rightTop,
 		  'uni-fab__content--other-platform': !isAndroidNvue
 		}"
-		 class="uni-fab__circle bg-img" style="background-image: url(../../static/first_newTodo.png);" @click="_onClick">
+		 class="uni-fab__circle bg-img" style="background-image: url(static/first_newTodo.png);" @click="_onClick">
 		<view class="fab-circle-v" :class="{'uni-fab__plus--active': isShow}"></view>
 		<view class="fab-circle-h" :class="{'uni-fab__plus--active': isShow}"></view>
 		</view>

@@ -11,14 +11,14 @@ const store = new Vuex.Store({
 		avatarUrl: '',
 		guguImg:
 			[
-				'gugu1',
-				'gugu2-1',
-				'gugu2-2',
-				'gugu3-1',
-				'gugu3-2',
-				'gugu3-3',
-				'gugu4-1',
-				'gugu4-2'
+				'https://s1.ax1x.com/2020/06/13/tjaS6e.png',
+				'https://s1.ax1x.com/2020/06/13/tjUxSO.png',
+				'https://s1.ax1x.com/2020/06/13/tjUzlD.png',
+				'https://s1.ax1x.com/2020/06/13/tjaCmd.png',
+				'https://s1.ax1x.com/2020/06/13/tjapOH.png',
+				'https://s1.ax1x.com/2020/06/13/tjaP0A.png',
+				'https://s1.ax1x.com/2020/06/13/tjaiTI.png',
+				'https://s1.ax1x.com/2020/06/13/tjakkt.png'
 			]
 	},
 	mutations: {
@@ -33,6 +33,9 @@ const store = new Vuex.Store({
 			uni.removeStorage({
 				key: 'userinfo'
 			})
+			uni.navigateBack({
+				delta:1
+			})
 		},
 		updateUserInfo(state, userinfo) {
 			state.nickName = userinfo.nickName
@@ -41,7 +44,6 @@ const store = new Vuex.Store({
 				url: `https://www.doaho.work:8080/user/update?salt=${state.userinfo['salt']}`,
 				method: 'POST',
 				data: {
-					"nickname": state.nickName,
 					"headPorirait": state.avatarUrl
 				},
 				success: (res) => {

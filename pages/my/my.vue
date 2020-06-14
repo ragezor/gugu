@@ -1,20 +1,20 @@
 <template>
 	<view class=" content">
-		<view class="bg-img" style="background-image: url(../../../static/bg_me.png)">
-			<cu-custom :isBack="true">
-				<!-- <block slot="backText">返回</block> -->
-				<block slot="content">导航栏</block>
+		<view class="bg-img" style="background-image: url(static/bg_me.png)">
+			<cu-custom :isBack="flase">
+				<block slot="backText"></block>
+				<block slot="content"></block>
 			</cu-custom>
-
-
+	
 
 			<view class="flex justify-around align-end ">
-				<view v-if="hasLogin" class="cu-avatar xl round margin-top" :style="[{backgroundImage:`url(${avatarUrl})`}]"></view>
-				<view v-else class="cu-avatar xl round margin-top" style="background-image:url(../../../static/D99BF290B33967FFC81E18410C8F6FF3.jpg);"></view>
+				<view v-if="hasLogin" class="cu-avatar xl round margin-top margin-tb-xl" :style="[{backgroundImage:`url(${avatarUrl})`}]"></view>
+				<view v-else class="cu-avatar xl round margin-top margin-tb-xl" style="background-image:url(static/D99BF290B33967FFC81E18410C8F6FF3.jpg);"></view>
 				<view class="gaol">
 					<view v-if="hasLogin" class="text-white text-lg">{{nickName}}</view>
-					<button v-else @click="login">Login</button>
+					<button v-else class="cu-btn bg-white lg shadow text-bold" @click="login">Login</button>
 					<view class="text-white text-sm  margin-top">{{userinfo['motto']==null?'':userinfo['motto']}}</view>
+					<view style="height: 30px;"></view>
 				</view>
 
 			</view>
@@ -32,34 +32,34 @@
 				<text>{{item.name}}</text>
 			</view> -->
 
-		<view class="cu-list grid col-3 no-border margin-top">
+		<view class="cu-list grid col-2 no-border margin-top">
+			<!-- <view>
+				<button class=" cu-btn bg-img lg text-white" style="background-image: url(static/me_todo.png)" @click="toIndex"></button>
+				<view class="text-grey">学习任务</text></view>
+			</view> -->
 			<view>
-				<button class=" cu-btn bg-img lg text-white" style="background-image: url(../../../static/me_todo.png)" @click="toIndex"></button>
-				<view class="text-grey">计划清单</text></view>
+				<button class=" cu-btn bg-img lg text-white" style="background-image: url(static/me_diary.png)" @click="toDiary"></button>
+				<view class="text-grey">心情</text></view>
 			</view>
 			<view>
-				<button class=" cu-btn bg-img lg text-white" style="background-image: url(../../../static/me_diary.png)" @click="toDiary"></button>
-				<view class="text-grey">心情日记</text></view>
-			</view>
-			<view>
-				<button class=" cu-btn bg-img lg text-white" style="background-image: url(../../../static/me_summary.png)" @click="toSummary"></button>
+				<button class=" cu-btn bg-img lg text-white" style="background-image: url(static/me_summary.png)" @click="toSummary"></button>
 				<view class="text-grey">每周总结</text></view>
 			</view>
-			<view>
-				<button class=" cu-btn bg-img lg text-white" style="background-image: url(../../../static/me_team.png)" @click="toTeam"></button>
+		<!-- 	<view>
+				<button class=" cu-btn bg-img lg text-white" style="background-image: url(static/me_team.png)" @click="toTeam"></button>
 				<view class="text-grey">我的小组</text></view>
-			</view>
+			</view> -->
 			<view>
-				<button class=" cu-btn bg-img lg text-white" style="background-image: url(../../../static/me_gugu.png)" @click="toAchieve"></button>
+				<button class=" cu-btn bg-img lg text-white" style="background-image: url(static/me_gugu.png)" @click="toAchieve"></button>
 				<view class="text-grey">我的成就</text></view>
 			</view>
 			<view>
-				<button class=" cu-btn bg-img lg text-white" style="background-image: url(../../../static/me_set.png)" @click="toSettings"></button>
+				<button class=" cu-btn bg-img lg text-white" style="background-image: url(static/me_set.png)" @click="toSettings"></button>
 				<view class="text-grey">我的设置</text></view>
 			</view>
 		</view>
 
-		<view class="bg-img bg-mask flex align-center margin-top" style="background-image: url(../../../static/c77af190c04ac7be99a65e631ae72e9e.jpg);height: 414upx;">
+		<view id="gugu" class="bg-img bg-mask flex align-center margin-top" style="background-image: url(static/c77af190c04ac7be99a65e631ae72e9e.jpg);height: 414upx;">
 			<view class="padding-xl text-white">
 				<view class="padding-xs text-xxl text-bold">
 					我咕了
@@ -97,13 +97,13 @@
 		computed:mapState({
 			hasLogin: state => state.hasLogin,
 			userinfo: state => state.userinfo,
-			nickName: state => state.nickName,
+			nickName: state => state.userinfo['nickname'],
 			avatarUrl: state => state.avatarUrl
 		}),
 		methods: {
 			login(){
 				uni.navigateTo({
-					url:'../login/login'
+					url:'/pages/login/login'
 				})
 			},
 			NavChange: function(e) {
@@ -146,5 +146,23 @@
 <style>
 	#btn1 {
 		background-size: cover;
+	}
+	
+	.block {
+		height: 30px;
+	}
+	
+	.text-grey {
+		font-size: 13px;
+	}
+	
+	.box {
+		height: 75px;
+	}
+	
+	#gugu {
+	
+		margin: 50px 0px 0px 0px;
+	
 	}
 </style>

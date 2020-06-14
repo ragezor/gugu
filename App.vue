@@ -27,7 +27,6 @@
 				}
 			})
 		 	const userinfo = uni.getStorageSync('userinfo')
-			console.info(userinfo)
 			if(userinfo){
 				var _this = this
 				this.$store.commit('login',userinfo)
@@ -42,6 +41,14 @@
 						// _this.updateUserInfo(); //调用更新信息方法
 					}
 				});
+			}
+			console.info("APP load")
+		},
+		onHide:function(){
+			console.info("APP hide")
+			if(uni.getStorageSync('userinfo')){
+				console.info('runrun')
+				uni.setStorageSync('userinfo',this.$store.state.userinfo)
 			}
 		},
 	}

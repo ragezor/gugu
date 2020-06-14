@@ -11,7 +11,7 @@
 var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ 5));
 
 
-var _store = _interopRequireDefault(__webpack_require__(/*! ./store */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var cuCustom = function cuCustom() {__webpack_require__.e(/*! require.ensure | colorui/components/cu-custom */ "colorui/components/cu-custom").then((function () {return resolve(__webpack_require__(/*! ./colorui/components/cu-custom.vue */ 79));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+var _store = _interopRequireDefault(__webpack_require__(/*! ./store */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var cuCustom = function cuCustom() {__webpack_require__.e(/*! require.ensure | colorui/components/cu-custom */ "colorui/components/cu-custom").then((function () {return resolve(__webpack_require__(/*! ./colorui/components/cu-custom.vue */ 125));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 _vue.default.component('cu-custom', cuCustom);
 
 _vue.default.config.productionTip = false;
@@ -121,7 +121,6 @@ var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));function _i
       } });
 
     var userinfo = uni.getStorageSync('userinfo');
-    console.info(userinfo);
     if (userinfo) {
       var _this = this;
       this.$store.commit('login', userinfo);
@@ -136,6 +135,14 @@ var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));function _i
           // _this.updateUserInfo(); //调用更新信息方法
         } });
 
+    }
+    console.info("APP load");
+  },
+  onHide: function onHide() {
+    console.info("APP hide");
+    if (uni.getStorageSync('userinfo')) {
+      console.info('runrun');
+      uni.setStorageSync('userinfo', this.$store.state.userinfo);
     }
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

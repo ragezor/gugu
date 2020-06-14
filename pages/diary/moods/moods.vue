@@ -1,16 +1,14 @@
 <template>
 	<view class="content" style="flex: auto;">
-		<view class="bg-img" style="background-image: url(../../../static/bg_me.png);">
-			<cu-custom :isBack="true">
-				<block slot="backText">返回</block>
-				<block slot="content">选择心情</block>
-			</cu-custom>
-		</view>
+		<cu-custom :isBack="true" bgImage="static/bg_me.png">
+			<block slot="backText">返回</block>
+			<block slot="content">选择心情</block>
+		</cu-custom>
 		<uni-grid :column="5" :highlight="true" @change="change" >
 			<uni-grid-item v-for="(item, index) in moods" :index="index" :key="index">
 				<view class="grid-item-box" style="background-color: #fff;">
 					<view style="margin: 10px;">
-						<image :src="`../../../static/${item}.png`" class="image" mode="widthFix" />
+						<image :src="`/static/${index}.png`" class="image" mode="widthFix" />
 					</view>
 				</view>
 			</uni-grid-item>

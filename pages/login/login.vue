@@ -1,9 +1,13 @@
 <template>
 	<view>
+		<cu-custom :isBack="true">
+			<block slot="backText"></block>
+			<block slot="content">登陆</block>
+		</cu-custom>
 		<view v-if="isCanUse">
 			<view>
 				<view class='header'>
-					<!-- <image src='../../static/img/wx_login.png'></image> -->
+					<image src='/static/wx_login.png'></image>
 				</view>
 				<view class='content'>
 					<view>申请获取以下权限</view>
@@ -26,7 +30,7 @@
 				OpenId: '',
 				nickName: null,
 				avatarUrl: null,
-				isCanUse: !uni.getStorageSync('userinfo')//默认为true
+				isCanUse: !uni.getStorageSync('userinfo') //默认为true
 			};
 		},
 		methods: {
@@ -56,13 +60,13 @@
 								//openId、或SessionKdy存储//隐藏loading
 								console.info(res)
 								if (res.data.success) {
-									_this.$store.commit("login",res.data.data)
+									_this.$store.commit("login", res.data.data)
 									uni.getUserInfo({
 										provider: 'weixin',
 										success: function(infoRes) {
 											//获取用户信息后向调用信息更新方法
 											console.info(infoRes)
-											_this.$store.commit('updateUserInfo',infoRes.userInfo)
+											_this.$store.commit('updateUserInfo', infoRes.userInfo)
 											// let nickName = infoRes.userInfo.nickName; //昵称
 											// let avatarUrl = infoRes.userInfo.avatarUrl; //头像
 											// _this.updateUserInfo(); //调用更新信息方法

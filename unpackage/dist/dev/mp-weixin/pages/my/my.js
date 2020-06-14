@@ -207,7 +207,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _vuex = __webpack_require__(/*! vuex */ 12);var uniGrid = function uniGrid() {__webpack_require__.e(/*! require.ensure | components/uni-grid/uni-grid */ "components/uni-grid/uni-grid").then((function () {return resolve(__webpack_require__(/*! @/components/uni-grid/uni-grid.vue */ 103));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniGridItem = function uniGridItem() {__webpack_require__.e(/*! require.ensure | components/uni-grid-item/uni-grid-item */ "components/uni-grid-item/uni-grid-item").then((function () {return resolve(__webpack_require__(/*! @/components/uni-grid-item/uni-grid-item.vue */ 110));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _vuex = __webpack_require__(/*! vuex */ 12);var uniGrid = function uniGrid() {__webpack_require__.e(/*! require.ensure | components/uni-grid/uni-grid */ "components/uni-grid/uni-grid").then((function () {return resolve(__webpack_require__(/*! @/components/uni-grid/uni-grid.vue */ 156));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniGridItem = function uniGridItem() {__webpack_require__.e(/*! require.ensure | components/uni-grid-item/uni-grid-item */ "components/uni-grid-item/uni-grid-item").then((function () {return resolve(__webpack_require__(/*! @/components/uni-grid-item/uni-grid-item.vue */ 163));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 {
   onShow: function onShow() {
     console.info(this.hasLogin);
@@ -229,13 +229,13 @@ var _vuex = __webpack_require__(/*! vuex */ 12);var uniGrid = function uniGrid()
   computed: (0, _vuex.mapState)({
     hasLogin: function hasLogin(state) {return state.hasLogin;},
     userinfo: function userinfo(state) {return state.userinfo;},
-    nickName: function nickName(state) {return state.nickName;},
+    nickName: function nickName(state) {return state.userinfo['nickname'];},
     avatarUrl: function avatarUrl(state) {return state.avatarUrl;} }),
 
   methods: {
     login: function login() {
       uni.navigateTo({
-        url: '../login/login' });
+        url: '/pages/login/login' });
 
     },
     NavChange: function NavChange(e) {

@@ -90,7 +90,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components
+var components = {
+  uniList: function() {
+    return __webpack_require__.e(/*! import() | components/uni-list/uni-list */ "components/uni-list/uni-list").then(__webpack_require__.bind(null, /*! @/components/uni-list/uni-list.vue */ 170))
+  },
+  uniListItem: function() {
+    return __webpack_require__.e(/*! import() | components/uni-list-item/uni-list-item */ "components/uni-list-item/uni-list-item").then(__webpack_require__.bind(null, /*! @/components/uni-list-item/uni-list-item.vue */ 177))
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -155,91 +162,479 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
-{
-  onShow: function onShow() {
-    this.getMembers();
-    this.getGugu();
-  },
-  data: function data() {
-    return {
-      team_name: '小程序我们已经鸽了',
-      members: [],
-      gugu: {},
-      team: {},
-      feetAmount: 0 };
-
-  },
-  computed: _objectSpread({},
-  (0, _vuex.mapState)({
-    userinfo: function userinfo(state) {return state.userinfo;} })),
 
 
-  methods: {
-    getMembers: function getMembers() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+function getDate(type) {var date = new Date();var year = date.getFullYear();var month = date.getMonth() + 1;var day = date.getDate();if (type === 'start') {year = year;} else if (type === 'end') {day = day + 7;}month = month > 9 ? month : '0' + month;;day = day > 9 ? day : '0' + day;return "".concat(year, "-").concat(month, "-").concat(day);}var _default = { onShow: function onShow() {if (this.$store.state.userinfo['teamId'] == null) {this.members = [];this.gugus = [];} else {this.getTeam();this.getMembers();this.getTeamMemberGugu();}if (this.$store.state.hasLogin == false) {this.mygugu = [];}this.getGugu();}, data: function data() {return { subjects: ['数学', '英语', '专业课', '政治'], learnStyle: ['做题', '背单词', '看书', '看视频'], team_name: '小程序我们已经鸽了', team: { "id": '', "name": '不孤单' }, members: [], mygugu: {}, gugus: [], feetAmount: 0, modalName: null, selectedGugu: 0, memberTodoList: [] };}, computed: _objectSpread({}, (0, _vuex.mapState)({ userinfo: function userinfo(state) {return state.userinfo;}, guguImg: function guguImg(state) {return state.guguImg;} })), methods: { onShareAppMessage: function onShareAppMessage(e) {var title = '快来一起学习吧！';return { title: title, path: 'pages/index/team/team' };}, showModal1: function showModal1(index) {this.selectedGugu = index;this.modalName = "DialogModal1";}, showModal2: function showModal2(e) {this.modalName = "DialogModal2";}, showModal3: function showModal3(e) {this.modalName = "DialogModal3";}, showModal4: function showModal4(e) {this.modalName = "DialogModal4";}, showModal5: function showModal5(e) {this.modalName = "DialogModal5";}, showModal6: function showModal6(e) {this.modalName = "DialogModal6";}, showModal7: function showModal7(e) {this.modalName = "DialogModal7";}, hideModal: function hideModal(e) {this.memberTodoList = [], this.modalName = null;}, onInput: function onInput(e) {this.$emit('input', e.detail.value);}, getTeam: function getTeam() {var _this = this;uni.request({ url: "https://www.doaho.work:8080/team/get?salt=".concat(this.userinfo['salt']), success: function success(res) {console.info(res.data.message);if (res.data.success) {_this.team = res.data.data;}} });}, updateTeam: function updateTeam() {var _this = this;uni.request({ url: "https://www.doaho.work:8080/team/update?salt=".concat(userinfo['salt']), method: "POST", data: { "name": _this.team['name'] }, success: function success(res) {console.info(res.data.message);} });}, getMembers: function getMembers() {var _this = this;uni.request({ url: "https://www.doaho.work:8080/team/get_members?salt=".concat(this.userinfo['salt']), success: function success(res) {if (res.data.success) {var members = res.data.data;for (var i = 0; i < members.length; i++) {if (members[i]['id'] == _this.userinfo['id']) {members.splice(i, 1);break;}}console.info('member' + members);_this.members = members;}} });}, getGugu: function getGugu() {var _this = this;uni.request({ url: "https://www.doaho.work:8080/gugu/get?salt=".concat(this.userinfo['salt']), success: function success(res) {if (res.data.success) {_this.mygugu = res.data.data;}} });}, getTeamMemberGugu: function getTeamMemberGugu(userid) {var _this = this;uni.request({ url: "https://www.doaho.work:8080/gugu/getTeamMemberGugu?teamId=".concat(this.userinfo['teamId']), success: function success(res) {if (res.data.success) {var gugus = res.data.data;for (var i = 0; i < gugus.length; i++) {if (gugus[i]['id'] == _this.userinfo['guguId']) {gugus.splice(i, 1);break;}}_this.gugus = gugus;}} });}, showGugu: function showGugu() {this.showModal6();console.info(this.selectedGugu);}, getTeamMemberTodoList: function getTeamMemberTodoList() {this.showModal5();console.info(this.selectedGugu);var userid = this.userinfo['id'];if (this.selectedGugu != -1) {userid = this.members[0]['guguId'] == this.gugus[this.selectedGugu]['id'] ? this.members[0]['id'] : this.members[1]['id'];}console.info(userid);var _this = this;uni.request({ url: "https://www.doaho.work:8080/todolist/getTeamMemberTodolist?teamId=".concat(this.userinfo['teamId'], "&userId=").concat(userid, "&date=").concat(getDate()), success: function success(res) {console.info(res.data);if (res.data.success) {_this.memberTodoList = res.data.data;}} });}, feed: function feed() {if (this.selectedGugu == -1) {var gugu = this.mygugu;} else {console.info(this.selectedGugu);var gugu = this.gugus[this.selectedGugu];} //TODO
+      var guguid = gugu['id'];var _food = this.mygugu['food'];if (this.feetAmount > _food) {uni.showToast({ icon: "none", title: "喂食数量大于食物总量" });} else {console.info('喂食' + guguid);var _this = this;uni.request({ url: "https://www.doaho.work:8080/gugu/feed?salt=".concat(this.userinfo['salt'], "&guguid=").concat(guguid, "&amount=").concat(this.feetAmount), success: function success(res) {if (res.data.success) {console.info(res.data.message);_this.getGugu();_this.getTeamMemberGugu();uni.showToast({ title: res.data.message, icon: "none" });}} });this.hideModal();}
+      this.feetAmount = 0;
+    },
+    creatTeam: function creatTeam() {var _this2 = this;
       var _this = this;
       uni.request({
-        url: "https://www.doaho.work:8080/team/get_members?salt=".concat(this.userinfo['salt']),
+        url: "https://www.doaho.work:8080/team/create_team?salt=".concat(this.userinfo['salt'], "&name=").concat(this.team['name']),
         success: function success(res) {
+          console.info(res.data.message);
           if (res.data.success) {
-            _this.members = res.data.data;
+            _this.team['id'] = res.data.data;
+            _this.userinfo['teamId'] = res.data.data;
+            uni.setStorageSync('userinfo', _this.userinfo);
+            _this.getMembers();
+            _this.getTeamMemberGugu();
+            _this2.hideModal();
           }
         } });
 
     },
-    getGugu: function getGugu() {
+    joinTeam: function joinTeam() {var _this3 = this;
       var _this = this;
       uni.request({
-        url: "https://www.doaho.work:8080/gugu/get?salt=".concat(this.userinfo['salt']),
+        url: "https://www.doaho.work:8080/team/join_team?salt=".concat(this.userinfo['salt'], "&teamid=").concat(this.team['id']),
         success: function success(res) {
+          console.info(res.data.message);
           if (res.data.success) {
-            _this.gugu = res.data.data;
-          }
-        } });
+            _this.userinfo['teamId'] = _this.team['id'];
+            uni.setStorageSync('userinfo', _this.userinfo);
+            _this.getMembers();
+            _this.getTeamMemberGugu();
+            _this.getTeam();
+            _this3.hideModal();
+            uni.showToast({
+              title: '入队成功',
+              icon: 'none' });
 
-    },
-    getTeamMemberGugu: function getTeamMemberGugu(userid) {
-      var _this = this;
-      uni.request({
-        url: "https://www.doaho.work:8080/gugu/getTeamMemberGugu?teamId=".concat(this.userinfo['teamId'], "&userId=").concat(userid),
-        success: function success(res) {
-          if (res.data.success) {
-            _this.gugu = res.data.data;
-          }
-        } });
+          } else {
+            uni.showToast({
+              title: '队伍不存在',
+              icon: 'none' });
 
-    },
-    feed: function feed(guguid) {
-      var _this = this;
-      uni.reLaunch({
-        url: "https://www.doaho.work:8080/gugu/feed?salt=".concat(this.userinfo['salt'], "&guguid=").concat(guguid, "&amount=").concat(this.feetAmount),
-        success: function success(res) {
-          if (res.data.success) {
-            console.info(res.data.message);
-          }
-        } });
-
-    },
-    creatTeam: function creatTeam() {
-      var _this = this;
-      uni.request({
-        url: "https://www.doaho.work:8080/team/create_team?salt=".concat(this.userinfo['salt']),
-        success: function success(res) {
-          if (res.data.success) {
-            _this.team = res.data.data;
           }
         } });
 
     },
     quitTeam: function quitTeam() {
       var _this = this;
-      uni.reLaunch({
+      uni.request({
         url: "https://www.doaho.work:8080/team/quit_team?salt=".concat(this.userinfo['salt']),
         success: function success(res) {
+          console.info(res.data.message);
           if (res.data.success) {
-            console.info(res.data.message);
-            _this.team = {};
+            _this.team = {
+              "name": "不孤单",
+              "id": "" };
+
             _this.members = [];
+            _this.gugus = [];
+            _this.userinfo['teamId'] = null;
+            uni.setStorageSync('userinfo', _this.userinfo);
+            uni.showToast({
+              title: '退队成功',
+              icon: 'none' });
+
           }
         } });
 

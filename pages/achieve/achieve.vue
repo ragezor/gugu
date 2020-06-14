@@ -1,28 +1,26 @@
 <template>
 	<view class=" content">
-		<view class="bg-img" style="background-image: url(../../../static/bg_me.png)">
-			<cu-custom :isBack="true">
-				<block slot="backText">返回</block>
-				<block slot="content">我的成就</block>
-			</cu-custom>
-		</view>
+		<cu-custom :isBack="true" bgImage="static/bg_me.png">
+			<block slot="backText">返回</block>
+			<block slot="content">我的成就</block>
+		</cu-custom>
 		<!-- <view class="justify-around align-end">
 			<button class="cu-btn    bg-img shadow" style="background-image: url(../../../static/me_gugu.png)"@tap="showModal" data-target="DialogModal1"></button>
 	<view class="cuIcon-home"></view>
 	</view> -->
 		<view class="flex solid-bottom padding justify-around align-end">
 			<!-- <button class="cu-btn bg-img shadow" style="background-image: url(../../../static/gugu4-1.png)" @tap="showModal" data-target="DialogModal1"></button> -->
-			<image :src="`../../static/${guguImg[gugu.typeid-1]}.png`" style="width: 50px;height:50px"></image>
+			<image :src="`${guguImg[gugu.typeid-1]}`" style="width: 50px;height:50px"></image>
 			<view class="cuIcon-home text-xsl light text-pink">
-				<view class="text-black">经验值: {{gugu['weight']}}</view>
-				<view class="text-black">剩余鸽粮: {{gugu['food']}}</view>
+				<view class="text-black">经验值: {{gugu['weight']==null?0:gugu['weight']}}</view>
+				<view class="text-black">剩余鸽粮: {{gugu['food']==null?0:gugu['food']}}</view>
 			</view>
 		</view>
 		<uni-grid :column="2" :highlight="true" @change="change" >
-			<uni-grid-item v-for="(item, index) in guguImg" :index="index" :key="index">
+			<uni-grid-item v-for="(item, index) in shows" :index="index" :key="index">
 				<view class="grid-item-box" style="background-color: #ffffff;">
 					<view style="margin: 40px;">
-						<image :src="`../../static/${item}.png`" class="image" mode="widthFix" />
+						<image :src="`${item}`" class="image" mode="widthFix" />
 					</view>
 				</view>
 			</uni-grid-item>
@@ -61,16 +59,18 @@
 		},
 		data() {
 			return {
+				limits:[],
 				gugu: {},
 				selectIndex: 0,
-				modalName:''
+				modalName:'',
+				shows:[]
 			}
 		},
 		computed: {
 			...mapState({
 				userinfo: state => state.userinfo,
 				guguImg: state => state.guguImg
-			})
+			}),
 		},
 		methods: {
 			changeGugu(){
@@ -99,12 +99,27 @@
 				this.modalName = null
 			},
 			getGugu() {
+				console.info('getgugu')
 				var _this = this;
 				uni.request({
 					url: `https://www.doaho.work:8080/gugu/get?salt=${this.userinfo['salt']}`,
 					success: (res) => {
 						if (res.data.success) {
 							_this.gugu = res.data.data
+							switch(_this.gugu['level']){	
+								case 1:
+									_this.shows = _this.guguImg.slice(0,1)
+									break;
+								case 2:
+									_this.shows = _this.guguImg.slice(0,3)
+									break;
+								case 3:
+									_this.shows = _this.guguImg.slice(0,6)
+									break;
+								case 4:
+									_this.shows = _this.guguImg
+									break;
+							}
 						}
 					}
 				})

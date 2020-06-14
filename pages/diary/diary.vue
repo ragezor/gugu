@@ -1,17 +1,16 @@
 <template>
 	<view class=" content">
-		<view class="bg-img" style="background-image: url(../../../static/bg_me.png);">
-			<cu-custom :isBack="true">
-				<block slot="backText">返回</block>
-				<block slot="content">心情日记</block>
-			</cu-custom>
-		</view>
-
-		<view class="cu-timeline">
-			<view class="cu-time">昨天</view>
+		<cu-custom :isBack="true" bgImage="static/bg_me.png">
+			<block slot="backText">返回</block>
+			<block slot="content">心情</block>
+			<!-- <block slot="right"><text style="padding-right: 20px;font-size: 30rpx;" @click="toMood">添加</text></block> -->
+		</cu-custom>
+		
+		<view v-if="diarys==null" class="flex justify-center">快点击右上角记录自己的心情吧</view>
+		<view v-else class="cu-timeline">
 			<view class="cu-item text-red" v-for="(item,index) in diarys">
-				<view class="content shadow-blur bg-red">
-					<view class="cu-avatar round" :style="[{backgroundImage:'url(../../../static/'+ (moods[item.moodId-1]) +'.png)'}]"></view>
+				<view class="content shadow-blur" style="background-color: #ffdead;">
+					<view class="cu-avatar round" :style="[{backgroundImage:'url(static/'+ (item.moodId-1) +'.png)'}]"></view>
 					<text style="margin-left: 5px;">{{item.created}}</text>
 					<text class="cuIcon-close" style="position: absolute; top: 5px; right: 7px;" @click="deleteDiary(index,item.id)"></text>
 					<view style="margin-left: 20px;">
@@ -20,7 +19,7 @@
 				</view>
 			</view>
 		</view>
-		<button class="cu-btn cuIcon lg bg-img shadow" style="background-image: url(../../../static/first_newTodo.png)"
+		<button class="cu-btn cuIcon lg bg-img shadow" style="background-image: url(static/first_newTodo.png)"
 		 @click="toMood"></button>
 	</view>
 </template>

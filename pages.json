@@ -33,11 +33,34 @@
             "path" : "pages/settings/settings",
             "style" : {}
         }
+		,{
+		    "path" : "pages/settings/back",
+		    "style" : {}
+		}
+		,{
+		    "path" : "pages/settings/signature",
+		    "style" : {}
+		}
+		,{
+		    "path" : "pages/settings/operation_manual",
+		    "style" : {}
+		}
         ,{
             "path" : "pages/diary/moods/moods",
             "style" : {}
         }
-        
+        ,{
+            "path" : "pages/newTeam/newTeam",
+            "style" : {}
+        },
+		{
+		    "path" : "pages/newTeam/swiper",
+		    "style" : {}
+		}
+        ,{
+            "path" : "pages/newlogin/newlogin",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -54,20 +77,20 @@
 			{
 				"pagePath":"pages/index/index",
 				"text":"首页",
-				"iconPath":"static/tabbar/basics.png",
-				"selectedIconPath":"static/tabbar/basics_cur.png"
+				"iconPath":"static/tabbar/book.png",
+				"selectedIconPath":"static/tabbar/book_active.png"
 			},
 			{
 				"pagePath":"pages/team/team",
 				"text":"小组",
-				"iconPath":"/static/tabbar/basics.png",
-				"selectedIconPath":"static/tabbar/basics_cur.png"
+				"iconPath":"/static/tabbar/group.png",
+				"selectedIconPath":"static/tabbar/group_active.png"
 			},
 			{
 				"pagePath":"pages/my/my",
 				"text":"我的",
-				"iconPath":"static/tabbar/component.png",
-				"selectedIconPath":"static/tabbar/component_cur.png"
+				"iconPath":"static/tabbar/my.png",
+				"selectedIconPath":"static/tabbar/my_active.png"
 			}
 		]
 	}
