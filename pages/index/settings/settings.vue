@@ -94,6 +94,8 @@
 		  <uni-list-item title="每日提醒" :show-badge="true" :badge-text="time"@click="showModal2" :data-target="DialogModal2"></uni-list-item>
 		   <uni-list-item title="其他设置"></uni-list-item>
 		   <uni-list-item title="意见与反馈" @click="to('/pages/index/settings/back')"></uni-list-item>
+		   <uni-list-item title="操作手册" @click="to('/pages/index/settings/operation_manual')"></uni-list-item>
+		   
 	</uni-list>
 	
 	</view>

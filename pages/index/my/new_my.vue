@@ -69,7 +69,7 @@
 		
 		
 	
-		 <view class="bg-img bg-mask flex align-center margin-top " style="background-image: url(../../../static/c77af190c04ac7be99a65e631ae72e9e.jpg);height: 414upx; border-radius：30px;">
+		 <view class="bg-img bg-mask flex align-center margin-top "id="gugu" style="background-image: url(../../../static/c77af190c04ac7be99a65e631ae72e9e.jpg);height: 414upx; border-radius：30px;">
 		 	<view class="padding-xl text-white">
 		 		<view class="padding-xs text-xxl text-bold">
 		 			我咕了
@@ -155,5 +155,10 @@
 }
 .box{
 	height: 75px;
+}
+#gugu{
+	
+		margin : 50px 0px 0px 0px;
+	
 }
 </style>

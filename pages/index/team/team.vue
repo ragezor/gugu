@@ -3,24 +3,24 @@
 	<view class="bg-img"style="background-image: url(../../../static/bg_me.png)">
 	<cu-custom :isBack="true">
 		<block slot="backText">返回</block>
-		<block slot="content">我的小组</block>
+		<block slot="content"class="text-white">我的小组</block>
 	</cu-custom>
 	</view>
 	<view class=" flex justify-around align-end margin-top">
 		<view class="cu-avatar radius xl margin-left bg-white" style="background-image:url(../../../static/me_team.png);"></view>
 	     <view>
-			 <view class="flex justify-center align-start"><text class="light text-pink">{{team_name}}</text></view>
+			 <view class="flex justify-center align-start"><text class="light text-pink"><text class=" light text-blue">id:</text> {{team_id}} | <text class=" light text-blue"> 队名 :</text> {{team_name}}</text></view>
 		 <!-- 头像和上标 -->
 		 <view class="cu-avatar radius lg margin-left bg-white  margin-top" style="background-image:url(../../../static/D99BF290B33967FFC81E18410C8F6FF3.jpg);"><view class=' bg-green cu-tag badge cuIcon-check'></view></view>
 		 <view class="cu-avatar radius lg margin-left bg-white margin-top" style="background-image:url(../../../static/D99BF290B33967FFC81E18410C8F6FF3.jpg);"><view class=' bg-red cu-tag badge cuIcon-close'></view></view>
 		 <view class="cu-avatar radius lg margin-left bg-white margin-top" style="background-image:url(../../../static/D99BF290B33967FFC81E18410C8F6FF3.jpg);"></view>
 		 </view>
 	</view> 
-	<button class="cu-btn share-btn block light bg-red margin-tb-sm lg "open-type="share" >召唤鸽子</button>
+	<button class="cu-btn  block light bg-red margin-tb-sm lg "@click="showModal6" data-target="DialogModal6" >召唤鸽子</button>
 	<button class="cu-btn  block light bg-red margin-tb-sm lg " @click="showModal3" data-target="DialogModal3">创建队伍</button>
 	<button class="cu-btn  block light bg-red margin-tb-sm lg " >加入队伍</button>
 	<button class="cu-btn  block light bg-red margin-tb-sm lg " >退出队伍</button>
-	
+	<view class="gugu_pos">
 	<view class="flex justify-around margin-top">
 		
 			<button class="cu-btn  lg  bg-gray bg-img shadow" style="width:150px;height:150px;background-image: url(../../../static/bird/橙鸽子.png)"@click="showModal1" :data-target="DialogModal"><view class=' bg-green cu-tag badge '>{{member_name_1}}</view></button>
@@ -29,6 +29,7 @@
 		<button class="cu-btn  lg   bg-gray bg-img shadow" style="width:100px;height:100px;background-image: url(../../../static/bird/橙鸽子.png)" @click="showModal1" :data-target="DialogModal"><view class=' bg-green cu-tag badge '>{{member_name_2}}</view></button>
 		<button class="cu-btn  lg   bg-gray bg-img shadow" style="width:100px;height:100px;background-image: url(../../../static/bird/橙鸽子.png)" @click="showModal1" :data-target="DialogModal"><view class=' bg-green cu-tag badge '>{{member_name_3}}</view></button>
 
+	</view>
 	</view>
 	<view class="cu-modal" :class="modalName=='DialogModal1'?'show':''">
 		<view class="cu-dialog">
@@ -164,6 +165,28 @@
 		</view>
 	</view>
 	
+	<view class="cu-modal" :class="modalName=='DialogModal6'?'show':''">
+		<view class="cu-dialog">
+			<view class="cu-bar bg-white justify-end">
+				<view class="content text-sm">清单信息</view>
+				<view class="action" @tap="hideModal">
+					<text class="cuIcon-close text-red"></text>
+				</view>
+			</view>
+		<view class=" margin-top">
+			<text class="light text-pink">给队员发送召唤消息，别再咕咕咕啦~~（给非队员的好友发送消息，好友是进不来的哦~ 好友可以通过id加入队伍！） </text>
+			
+		</view>
+			<view class="cu-bar bg-white justify-end">
+				<view class="action">
+					<button class="cu-btn  line-green text-green" @tap="hideModal">取消</button>
+					<button class="cu-btn  share-btn   line-green text-green" @tap="hideModal" open-type="share">召唤好友</button>
+	
+				</view>
+			</view>
+		</view>
+	</view>
+	
 	</view>
 </template>
 
@@ -176,8 +199,10 @@
 		components: {uniList,uniListItem},
 		data() {
 			return{
-				team_name:'小程序我们已经鸽了',
+				team_id:12345,
+				team_name:'不咕单',
 				modalName: null,
+				// member_name修改昵称
 				member_name_1:'霍云杰',
 				member_name_2:'咕咕',
 				member_name_3:'咕',
@@ -219,6 +244,9 @@
 							showModal5(e) {
 								this.modalName = "DialogModal5"
 							},
+							showModal6(e) {
+								this.modalName = "DialogModal6"
+							},
 							hideModal(e) {
 								this.modalName = null
 							},
@@ -231,6 +259,13 @@
 </script>
 
 <style>
-
+.text-white{
+	font-weight: bold;
+}
+.gugu_pos{
+	
+	
+	bottom: 0;
+}
 	
 </style>

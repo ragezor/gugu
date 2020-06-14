@@ -4,13 +4,23 @@
 		    "path" : "pages/index/team/team",
 		    "style" : {"navigationBarTitleText": "uni-app"}
 		},
+		{"path" :"pages/index/my/new_my",
+		    "style" : {"navigationBarTitleText": "uni-app"}
+		},
+		{
+		    "path" : "pages/index/summary/summary",
+		    "style" : {"navigationBarTitleText": "uni-app"}
+		},
 		{
 		    "path" : "pages/index/settings/settings",
 		    "style" : {"navigationBarTitleText": "uni-app"}
 		},
-	    {"path" :"pages/index/my/new_my",
-	    "style" : {"navigationBarTitleText": "uni-app"}
-	},
+		{
+		    "path" : "pages/index/settings/operation_manual",
+		    "style" : {"navigationBarTitleText": "uni-app"}
+		},
+		
+	    
 	
 	{
 	    "path" : "pages/index/settings/signature",

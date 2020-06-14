@@ -1,6 +1,11 @@
 
-.cu-btn  lg   bg-gray bg-img shadow{
-	width:100px;height:20px;
+.text-white{
+	font-weight: bold;
+}
+.gugu_pos{
+	
+	
+	bottom: 0;
 }
 	
 

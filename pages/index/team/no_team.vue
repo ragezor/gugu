@@ -3,7 +3,8 @@
 	<view class="bg-img"style="background-image: url(../../../static/bg_me.png)">
 	<cu-custom >
 		
-		<block slot="content">我的小组</block>
+		<block slot="content"class="text-white">我的小组</block>
+		
 	</cu-custom>
 	</view>
 	<view class=" flex justify-center align-end margin-top">
@@ -45,6 +46,8 @@
 </script>
 
 <style>
-
+.text-white{
+	font-weight: bold;
+}
 	
 </style>

@@ -1,8 +1,10 @@
 {
   "pages": [
     "pages/index/team/team",
-    "pages/index/settings/settings",
     "pages/index/my/new_my",
+    "pages/index/summary/summary",
+    "pages/index/settings/settings",
+    "pages/index/settings/operation_manual",
     "pages/index/settings/signature",
     "pages/index/settings/back",
     "pages/index/team/no_team",
