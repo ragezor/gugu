@@ -1,6 +1,6 @@
 <template>
 	<view class=" content">
-		<cu-custom :isBack="true" bgImage="static/bg_me.png">
+		<cu-custom :isBack="true" :bgImage="img.bg_me">
 			<block slot="backText">返回</block>
 			<block slot="content">我的成就</block>
 		</cu-custom>
@@ -53,12 +53,14 @@
 	import {
 		mapState
 	} from "vuex"
+	import Img2Base64 from "@/common/img2Base64.js"
 	export default {
 		onShow() {
 			this.getGugu();
 		},
 		data() {
 			return {
+				img: Img2Base64,
 				limits:[],
 				gugu: {},
 				selectIndex: 0,

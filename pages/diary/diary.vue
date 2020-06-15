@@ -1,6 +1,6 @@
 <template>
 	<view class=" content">
-		<cu-custom :isBack="true" bgImage="static/bg_me.png">
+		<cu-custom :isBack="true" :bgImage="img.bg_me">
 			<block slot="backText">返回</block>
 			<block slot="content">心情</block>
 			<!-- <block slot="right"><text style="padding-right: 20px;font-size: 30rpx;" @click="toMood">添加</text></block> -->
@@ -10,7 +10,7 @@
 		<view v-else class="cu-timeline">
 			<view class="cu-item text-red" v-for="(item,index) in diarys">
 				<view class="content shadow-blur" style="background-color: #ffdead;">
-					<view class="cu-avatar round" :style="[{backgroundImage:'url(static/'+ (item.moodId-1) +'.png)'}]"></view>
+					<view class="cu-avatar round" :style="[{backgroundImage:`url(${img.moodImg[item.moodId-1]})`}]"></view>
 					<text style="margin-left: 5px;">{{item.created}}</text>
 					<text class="cuIcon-close" style="position: absolute; top: 5px; right: 7px;" @click="deleteDiary(index,item.id)"></text>
 					<view style="margin-left: 20px;">
@@ -19,7 +19,7 @@
 				</view>
 			</view>
 		</view>
-		<button class="cu-btn cuIcon lg bg-img shadow" style="background-image: url(static/first_newTodo.png)"
+		<button class="cu-btn cuIcon lg bg-img shadow" :style="[{backgroundImage:`url(${img.first_newTodo})`}]"
 		 @click="toMood"></button>
 	</view>
 </template>
@@ -32,6 +32,7 @@
 	import uniGridItem from '@/components/uni-grid-item/uni-grid-item.vue'
 	import mood from '@/pages/'
 	import { mapState } from "vuex"
+	import Img2Base64 from "@/common/img2Base64.js"
 	export default {
 		components: {
 			uniPopup,
@@ -51,6 +52,7 @@
 		}),
 		data() {
 			return {
+				img: Img2Base64,
 				message: '',
 				msgType: '',
 				diarys: [],

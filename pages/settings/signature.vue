@@ -1,6 +1,6 @@
 <template>
 	<view class=" content bg-gray">
-		<cu-custom :isBack="true" bgImage="static/bg_me.png">
+		<cu-custom :isBack="true" :bgImage="img.bg_me">
 			<block slot="backText">返回</block>
 			<block slot="content">我的签名</block>
 		</cu-custom>

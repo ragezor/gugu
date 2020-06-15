@@ -1,7 +1,7 @@
 <template>
 	<view class=" content">
 
-		<cu-custom :isBack="true" bgImage="static/bg_me.png">
+		<cu-custom :isBack="true" :bgImage="img.bg_me">
 			<block slot="backText">返回</block>
 			<block slot="content">我的设置</block>
 		</cu-custom>
@@ -98,6 +98,7 @@
 <script>
 	import uniList from "@/components/uni-list/uni-list.vue"
 	import uniListItem from "@/components/uni-list-item/uni-list-item.vue"
+		import Img2Base64 from "@/common/img2Base64.js"
 	import {
 		mapState
 	} from "vuex"
@@ -108,6 +109,7 @@
 		},
 		data() {
 			return {
+				img: Img2Base64,
 				name: 'compInput',
 				behaviors: ['uni://form-field'],
 				time: '7:00',
@@ -141,9 +143,9 @@
 			},
 			quit() {
 				this.$store.commit('logout')
-				// uni.navigateBack({
-				// 	delta:1
-				// })
+				uni.navigateBack({
+					delta:1
+				})
 			},
 			switchChange(e) {
 				uni.showToast({

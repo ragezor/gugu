@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class=" bg-img  shadow-blur" style="background-image:url(static/bg_first.png)">
+		<view class=" bg-img  shadow-blur" :style="[{backgroundImage:`url(${imgs.bg_first})`}]">
 			<cu-custom>
 				<block slot="content"><text class="text-white" style="font-weight: bold;">不咕单</text></block>
 			</cu-custom>
@@ -29,7 +29,7 @@
 			不咕值:{{BGZ}}</view>
 		<view v-if="userinfo['target']==null" class="flex align-center justify-center margin-top">
 			<view class="text-yellow text-sm ">常立志更要立长志，来为自己设定一个目标吧！</view>
-			<button class="cu-btn cuIcon  lg bg-img shadow" style="background-image: url(static/first_newGoal.png)" @tap="showModal"
+			<button class="cu-btn cuIcon  lg bg-img shadow" :style="[{backgroundImage:`url(${imgs.first_newGoal})`}]" @tap="showModal"
 			 data-target="DialogModal1"></button>
 		</view>
 		<view v-else class="flex align-center justify-center margin-top">
@@ -38,7 +38,7 @@
 		<view class="cu-modal" :class="modalName=='DialogModal1'?'show':''">
 			<view class="cu-dialog">
 				<view class="cu-bar bg-white justify-end">
-					<view class="content">先定一个目标院校</view>
+					<view class="content">先定一个目标院校</view>	
 					<view class="action" @tap="hideModal">
 						<text class="cuIcon-close text-red"></text>
 					</view>
@@ -150,6 +150,7 @@
 	import todolist2 from '@/components/itemList/itemList1'
 	import todolist1 from '@/components/itemList/itemList'
 	import fab from '@/components/uni-fab/uni-fab.vue'
+	import Img2Base64 from "@/common/img2Base64.js"
 	import {
 		mapState
 	} from 'vuex'
@@ -194,6 +195,7 @@
 		},
 		data() {
 			return {
+				imgs: Img2Base64,
 				inputClearValue: '',
 				showClearIcon: false,
 				multiArray: [
@@ -398,6 +400,7 @@
 							let startTime = `${year}-${month}-${day}`
 							_this.getTodolist(startTime)
 							console.info('run here')
+							_this.inputClearValue = ''
 						}
 					}
 				})

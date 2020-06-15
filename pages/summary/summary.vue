@@ -1,10 +1,10 @@
 <template>
 	<view class=" content">
-			<cu-custom :isBack="true" bgImage="static/bg_me.png">
+			<cu-custom :isBack="true" :bgImage="img.bg_me">
 				<block slot="backText">返回</block>
 				<block slot="content">你找到了未知区域!</block>
 			</cu-custom>
-		<image src="../../static/summary.jpg" style="width: 100%; height: 700px;"></image>
+		<image :src="img.summary" style="width: 100%; height: 700px;"></image>
 		<!-- 	图片 -->
 		<!-- <view class="flex justify-center" id="img1">
 			<image src="/static/8dbd55afb727c2c1f54c6885cad2babc%20(1).jpg" mode="aspectFit"></image>
@@ -25,7 +25,7 @@
 <script>
 	import uniList from "@/components/uni-list/uni-list.vue"
 	import uniListItem from "@/components/uni-list-item/uni-list-item.vue"
-
+	import Img2Base64 from "@/common/img2Base64.js"
 	export default {
 		components: {
 			uniList,
@@ -35,6 +35,7 @@
 
 		data() {
 			return {
+				img: Img2Base64,
 				name: '旺仔旺仔旺仔',
 				starttime: '5.25',
 				endtime: '5.31',

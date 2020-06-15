@@ -7,7 +7,7 @@
 		<view v-if="isCanUse">
 			<view>
 				<view class='header'>
-					<image src='/static/wx_login.png'></image>
+					<image :src='img.weixin'></image>
 				</view>
 				<view class='content'>
 					<view>申请获取以下权限</view>
@@ -23,9 +23,11 @@
 </template>
 
 <script>
+	import Img2Base64 from "@/common/img2Base64.js"
 	export default {
 		data() {
 			return {
+				img: Img2Base64,
 				SessionKey: '',
 				OpenId: '',
 				nickName: null,
@@ -37,9 +39,6 @@
 			//第一授权获取用户信息===》按钮触发
 			wxGetUserInfo() {
 				let _this = this;
-				uni.showLoading({
-					title: '登录中...'
-				});
 				// 1.wx获取登录用户code
 				uni.login({
 					provider: 'weixin',
@@ -65,15 +64,28 @@
 										provider: 'weixin',
 										success: function(infoRes) {
 											//获取用户信息后向调用信息更新方法
+									
+											console.info('登陆中')
+											uni.showLoading({
+												title: '登录中...'
+											});
 											console.info(infoRes)
 											_this.$store.commit('updateUserInfo', infoRes.userInfo)
 											// let nickName = infoRes.userInfo.nickName; //昵称
 											// let avatarUrl = infoRes.userInfo.avatarUrl; //头像
 											// _this.updateUserInfo(); //调用更新信息方法
+											
+											uni.hideLoading()
+											uni.navigateBack()
+										},
+										fail() {
+											_this.$store.commit('logout')
+											uni.showToast({
+												title:"您取消了授权",
+												icon:"none"
+											})
 										}
 									});
-									uni.hideLoading();
-									uni.navigateBack()
 								}
 							}
 						});

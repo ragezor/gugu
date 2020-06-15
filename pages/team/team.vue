@@ -1,38 +1,45 @@
 <template>
-	<view class=" content">
-			<cu-custom :isBack="false" bgImage="static/bg_me.png">
+	<view class="content">
+			<cu-custom :isBack="false" :bgImage="img.bg_me">
 				<block slot="content"class="text-white">我的小组</block>
 			</cu-custom>
-		<view class=" flex justify-around align-end margin-top">
-			<view class="cu-avatar radius xl margin-left bg-white" style="background-image:url(static/me_team.png);"></view>
+		<view class="flex justify-around align-end margin-top">
+			<view class="cu-avatar radius xl margin-left bg-white" :style="[{backgroundImage:`url(${img.me_team})`}]"></view>
 			<view>
-				<view v-if="userinfo.teamId==null" class="flex justify-center align-start"><text class="light text-pink">未加入队伍</text></view>
+				<view v-if="!hasLogin" class="flex justify-center align-start"><text class="light text-pink">未登陆</text></view>
+				<view v-else-if="userinfo.teamId==null" class="flex justify-center align-start"><text class="light text-pink">未加入队伍</text></view>
 				<view v-else class="flex justify-center align-start"><text class="light text-pink"><text class=" light text-blue">id:</text> {{team['id']}} | <text class=" light text-blue"> 队名 :</text> {{team['name']}}</text></view>
 				<!-- 头像和上标 -->
 				<!-- <view class="cu-avatar radius lg margin-left bg-white  margin-top" style="background-image:url(../../../static/D99BF290B33967FFC81E18410C8F6FF3.jpg);"><view class=' bg-green cu-tag badge cuIcon-check'></view></view> -->
 				<!-- <view class="cu-avatar radius lg margin-left bg-white margin-top" style="background-image:url(../../../static/D99BF290B33967FFC81E18410C8F6FF3.jpg);"><view class=' bg-red cu-tag badge cuIcon-close'></view></view> -->
 				<!-- <view class="cu-avatar radius lg margin-left bg-white margin-top" style="background-image:url(../../../static/D99BF290B33967FFC81E18410C8F6FF3.jpg);"></view> -->
-				<view class="cu-avatar radius lg margin-left bg-white margin-top" :style="[{backgroundImage:`url(${userinfo['headPorirait']})`}]"></view>
+				<view v-if="hasLogin" class="cu-avatar radius lg margin-left bg-white margin-top" :style="[{backgroundImage:`url(${userinfo['headPorirait']})`}]"></view>
+				<view v-else class="cu-avatar radius lg margin-left bg-white margin-top" :style="[{backgroundImage:`url(${img.touxiang})`}]"></view>
 				<view v-for="(item,index) in members" class="cu-avatar radius lg margin-left bg-white margin-top" :style="[{backgroundImage:`url(${item['headPorirait']})`}]"></view>
-
 			</view>
 		</view>
 		<button v-if="userinfo.teamId==null" class="cu-btn  block light bg-red margin-tb-sm lg " @click="showModal3" data-target="DialogModal3">创建队伍</button>
 		<button v-else class="cu-btn share-btn block light bg-red margin-tb-sm lg" @click="showModal7" data-target="DialogModal6">召唤鸽子</button>
 		<button v-if="userinfo.teamId==null" class="cu-btn  block light bg-red margin-tb-sm lg " @click="showModal4">加入队伍</button>
 		<button v-else class="cu-btn  block light bg-red margin-tb-sm lg " @click="quitTeam">退出队伍</button>
-
-		<view class="flex justify-around margin-top">
-			<button class="cu-btn  lg  bg-gray bg-img shadow" style="width:150px;height:150px;" :style="[{backgroundImage:`url(${guguImg[mygugu['typeid']-1]})`}]"
-			 @click="showModal1(-1)" :data-target="DialogModal">
-				<view class=' bg-green cu-tag badge '>{{userinfo['nickname']}}</view>
-			</button>
-		</view>
-		<view class="flex justify-around al">
-			<button v-for="(item,index) in gugus" class="cu-btn lg bg-gray bg-img shadow" style="width:100px;height:100px;" :style="[{backgroundImage:`url(${guguImg[item['typeid']-1]})`}]"
-			 @click="showModal1(index)" :data-target="DialogModal">
-				<view class=' bg-green cu-tag badge '>{{members[0]['guguId']==item['id']?members[0]['nickname']:members[1]['nickname']}}</view>
-			</button>
+		
+		<view style="margin-top: 50px;">
+			<view class="flex justify-around margin-top">
+				<button v-if="!hasLogin" class="cu-btn  lg  bg-gray bg-img shadow" style="width:150px;height:150px;" :style="[{backgroundImage:`url(${guguImg[0]})`}]"
+				 @click="showModal1(-1)" :data-target="DialogModal">
+					<view class=' bg-green cu-tag badge '>{{userinfo['nickname']}}</view>
+				</button>
+				<button v-else class="cu-btn  lg  bg-gray bg-img shadow" style="width:150px;height:150px;" :style="[{backgroundImage:`url(${guguImg[mygugu['typeid']-1]})`}]"
+				 @click="showModal1(-1)" :data-target="DialogModal">
+					<view class=' bg-green cu-tag badge '>{{userinfo['nickname']}}</view>
+				</button>
+			</view>
+			<view class="flex justify-around al">
+				<button v-for="(item,index) in gugus" class="cu-btn lg bg-gray bg-img shadow" style="width:100px;height:100px;" :style="[{backgroundImage:`url(${guguImg[item['typeid']-1]})`}]"
+				 @click="showModal1(index)" :data-target="DialogModal">
+					<view class=' bg-green cu-tag badge '>{{members[0]['guguId']==item['id']?members[0]['nickname']:members[1]['nickname']}}</view>
+				</button>
+			</view>			
 		</view>
 		<view class="cu-modal" :class="modalName=='DialogModal1'?'show':''">
 			<view class="cu-dialog">
@@ -227,6 +234,7 @@
 	import {
 		mapState
 	} from 'vuex'
+	import Img2Base64 from "@/common/img2Base64.js"
 	export default {
 		onShow() {
 			if(this.$store.state.userinfo['teamId'] == null){
@@ -244,6 +252,7 @@
 		},
 		data() {
 			return {
+				img: Img2Base64,
 				subjects: ['数学', '英语', '专业课','政治'],
 				learnStyle:['做题', '背单词', '看书', '看视频'],
 				team_name: '小程序我们已经鸽了',
@@ -263,7 +272,8 @@
 		computed: {
 			...mapState({
 				userinfo: state => state.userinfo,
-				guguImg: state => state.guguImg
+				guguImg: state => state.guguImg,
+				hasLogin: state => state.hasLogin
 			})
 		},
 		methods: {

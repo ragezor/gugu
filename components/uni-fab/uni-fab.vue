@@ -33,7 +33,7 @@
 		  'uni-fab__circle--rightTop': rightTop,
 		  'uni-fab__content--other-platform': !isAndroidNvue
 		}"
-		 class="uni-fab__circle bg-img" style="background-image: url(static/first_newTodo.png);" @click="_onClick">
+		 class="uni-fab__circle bg-img" :style="[{backgroundImage:`url(${imgs.first_newTodo})`}]" @click="_onClick">
 		<view class="fab-circle-v" :class="{'uni-fab__plus--active': isShow}"></view>
 		<view class="fab-circle-h" :class="{'uni-fab__plus--active': isShow}"></view>
 		</view>
@@ -65,6 +65,7 @@
 	 * @event {Function} trigger 展开菜单点击事件，返回点击信息
 	 * @event {Function} fabClick 悬浮按钮点击事件
 	 */
+	import Img2Base64 from "@/common/img2Base64.js"
 	export default {
 		name: 'UniFab',
 		props: {
@@ -103,6 +104,7 @@
 		},
 		data() {
 			return {
+				imgs: Img2Base64,
 				fabShow: false,
 				isShow: false,
 				isAndroidNvue: platform === 'android',

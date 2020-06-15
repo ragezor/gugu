@@ -1,6 +1,6 @@
 <template>
 	<view class="content" style="flex: auto;">
-		<cu-custom :isBack="true" bgImage="static/bg_me.png">
+		<cu-custom :isBack="true" :bgImage="img.bg_me">
 			<block slot="backText">返回</block>
 			<block slot="content">选择心情</block>
 		</cu-custom>
@@ -8,7 +8,7 @@
 			<uni-grid-item v-for="(item, index) in moods" :index="index" :key="index">
 				<view class="grid-item-box" style="background-color: #fff;">
 					<view style="margin: 10px;">
-						<image :src="`/static/${index}.png`" class="image" mode="widthFix" />
+						<image :src="img.moodImg[index]" class="image" mode="widthFix" />
 					</view>
 				</view>
 			</uni-grid-item>
@@ -26,6 +26,7 @@
 	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
 	import uniGrid from '@/components/uni-grid/uni-grid.vue'
 	import uniGridItem from '@/components/uni-grid-item/uni-grid-item.vue'
+	import Img2Base64 from "@/common/img2Base64.js"
 	export default {
 		components: {
 			uniPopup,
@@ -36,6 +37,7 @@
 		},
 		data() {
 			return {
+				img: Img2Base64,
 				content:'123',
 				selectIndex: '',
 				moods: [

@@ -1,6 +1,6 @@
 <template>
 	<view class=" content bg-gray">
-		<cu-custom :isBack="true" bgImage="static/bg_me.png">
+		<cu-custom :isBack="true" :bgImage="img.bg_me">
 			<block slot="backText">返回</block>
 			<block slot="content">操作手册</block>
 		</cu-custom>
@@ -14,10 +14,12 @@
 </template>
 
 <script>
+		import Img2Base64 from "@/common/img2Base64.js"
 	export default {
 
 		data() {
 			return {
+				img: Img2Base64,
 				message: [{
 					"title": "不咕值",
 					"content": "不咕值是一个来判断用户每日学习情况的数量值，新用户登陆后，不咕值为0。根据用户每日是否设置的任务数量、任务完成情况以及连续打卡天数、组队情况、小组连续打卡天数等指标，用户每日可以增长相应数量的不咕值，不咕值每日清零，不进行累计。"

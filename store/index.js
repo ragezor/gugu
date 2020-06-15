@@ -33,9 +33,6 @@ const store = new Vuex.Store({
 			uni.removeStorage({
 				key: 'userinfo'
 			})
-			uni.navigateBack({
-				delta:1
-			})
 		},
 		updateUserInfo(state, userinfo) {
 			state.nickName = userinfo.nickName

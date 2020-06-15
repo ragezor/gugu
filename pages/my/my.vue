@@ -1,6 +1,6 @@
 <template>
 	<view class=" content">
-		<view class="bg-img" style="background-image: url(static/bg_me.png)">
+		<view class="bg-img" :style="[{backgroundImage:`url(${img.bg_me})`}]">
 			<cu-custom :isBack="flase">
 				<block slot="backText"></block>
 				<block slot="content"></block>
@@ -9,7 +9,7 @@
 
 			<view class="flex justify-around align-end ">
 				<view v-if="hasLogin" class="cu-avatar xl round margin-top margin-tb-xl" :style="[{backgroundImage:`url(${avatarUrl})`}]"></view>
-				<view v-else class="cu-avatar xl round margin-top margin-tb-xl" style="background-image:url(static/D99BF290B33967FFC81E18410C8F6FF3.jpg);"></view>
+				<view v-else class="cu-avatar xl round margin-top margin-tb-xl" :style="[{backgroundImage:`url(${img.touxiang})`}]"></view>
 				<view class="gaol">
 					<view v-if="hasLogin" class="text-white text-lg">{{nickName}}</view>
 					<button v-else class="cu-btn bg-white lg shadow text-bold" @click="login">Login</button>
@@ -32,34 +32,33 @@
 				<text>{{item.name}}</text>
 			</view> -->
 
-		<view class="cu-list grid col-2 no-border margin-top">
+		<view class="cu-list grid col-2 margin-top no-border">
 			<!-- <view>
 				<button class=" cu-btn bg-img lg text-white" style="background-image: url(static/me_todo.png)" @click="toIndex"></button>
 				<view class="text-grey">学习任务</text></view>
 			</view> -->
-			<view>
-				<button class=" cu-btn bg-img lg text-white" style="background-image: url(static/me_diary.png)" @click="toDiary"></button>
+			<view style="padding: 5px 0px;border-bottom: #e3e3e3 0.1px solid; border-right: #e3e3e3 0.1px solid">
+				<button class=" cu-btn bg-img lg text-white" :style="[{backgroundImage:`url(${img.me_diary})`}]" @click="toDiary"></button>
 				<view class="text-grey">心情</text></view>
 			</view>
-			<view>
-				<button class=" cu-btn bg-img lg text-white" style="background-image: url(static/me_summary.png)" @click="toSummary"></button>
+			<view style="padding: 5px 0px;border-bottom: #e3e3e3 0.1px solid; border-left: #e3e3e3 0.1px solid">
+				<button class=" cu-btn bg-img lg text-white" :style="[{backgroundImage:`url(${img.me_summary})`}]" @click="toSummary"></button>
 				<view class="text-grey">每周总结</text></view>
 			</view>
 		<!-- 	<view>
 				<button class=" cu-btn bg-img lg text-white" style="background-image: url(static/me_team.png)" @click="toTeam"></button>
 				<view class="text-grey">我的小组</text></view>
 			</view> -->
-			<view>
-				<button class=" cu-btn bg-img lg text-white" style="background-image: url(static/me_gugu.png)" @click="toAchieve"></button>
+			<view style="padding-top: 20px;border-top: #e3e3e3 0.1px solid; border-right: #e3e3e3 0.1px solid">
+				<button class=" cu-btn bg-img lg text-white" :style="[{backgroundImage:`url(${img.me_gugu})`}]" @click="toAchieve"></button>
 				<view class="text-grey">我的成就</text></view>
 			</view>
-			<view>
-				<button class=" cu-btn bg-img lg text-white" style="background-image: url(static/me_set.png)" @click="toSettings"></button>
+			<view style="padding-top: 20px;border-top: #e3e3e3 0.1px solid; border-left: #e3e3e3 0.1px solid">
+				<button class=" cu-btn bg-img lg text-white" :style="[{backgroundImage:`url(${img.me_set})`}]" @click="toSettings"></button>
 				<view class="text-grey">我的设置</text></view>
 			</view>
 		</view>
-
-		<view id="gugu" class="bg-img bg-mask flex align-center margin-top" style="background-image: url(static/c77af190c04ac7be99a65e631ae72e9e.jpg);height: 414upx;">
+		<view class="bg-img bg-mask align-center" style="margin-top: 40px;height: 414upx;" :style="[{backgroundImage:`url(${img.gugutang})`}]">
 			<view class="padding-xl text-white">
 				<view class="padding-xs text-xxl text-bold">
 					我咕了
@@ -76,6 +75,7 @@
 	import uniGrid from "@/components/uni-grid/uni-grid.vue"
 	import uniGridItem from "@/components/uni-grid-item/uni-grid-item.vue"
 	import { mapState } from "vuex"
+	import Img2Base64 from "@/common/img2Base64.js"
 	export default {
 		onShow() {
 			console.info(this.hasLogin)
@@ -86,6 +86,7 @@
 		},
 		data() {
 			return {
+				img: Img2Base64,
 				PageCur: 'basics',
 				gridCol: 3,
 				gridBorder: false,
@@ -158,11 +159,5 @@
 	
 	.box {
 		height: 75px;
-	}
-	
-	#gugu {
-	
-		margin: 50px 0px 0px 0px;
-	
 	}
 </style>

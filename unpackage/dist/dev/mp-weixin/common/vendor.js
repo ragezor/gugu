@@ -1736,9 +1736,6 @@ var store = new _vuex.default.Store({
       uni.removeStorage({
         key: 'userinfo' });
 
-      uni.navigateBack({
-        delta: 1 });
-
     },
     updateUserInfo: function updateUserInfo(state, userinfo) {
       state.nickName = userinfo.nickName;
@@ -2715,7 +2712,84 @@ var index_esm = {
 
 /***/ }),
 
-/***/ 189:
+/***/ 19:
+/*!************************************************************!*\
+  !*** C:/Users/24604/Desktop/小程序/gugu/common/img2Base64.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var _module$exports;function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var bg_first = 'https://s1.ax1x.com/2020/06/15/N93E8K.png';
+var bg_me = 'https://s1.ax1x.com/2020/06/15/N93ZvD.png';
+var gugutang = 'https://s1.ax1x.com/2020/06/15/N93F4x.jpg';
+var touxiang = 'https://s1.ax1x.com/2020/06/15/N9qSQs.jpg';
+var diary_active = 'https://s1.ax1x.com/2020/06/15/N9LYNT.png';
+var first_newGoal = 'https://s1.ax1x.com/2020/06/15/N93pDJ.png';
+var first_newTodo = 'https://s1.ax1x.com/2020/06/15/N93iU1.png';
+var me_diary = 'https://s1.ax1x.com/2020/06/15/N9LJEV.png';
+var me_gugu = 'https://s1.ax1x.com/2020/06/15/N9L3Bq.png';
+var me_set = 'https://s1.ax1x.com/2020/06/15/N9L8H0.png';
+var me_summary = 'https://s1.ax1x.com/2020/06/15/N9LQjs.png';
+var me_team = 'https://s1.ax1x.com/2020/06/15/N9jwvQ.png';
+var summary = 'https://s1.ax1x.com/2020/06/15/N939b9.jpg';
+var target_active = 'https://s1.ax1x.com/2020/06/15/N93AC6.png';
+var task_active = 'https://s1.ax1x.com/2020/06/15/N9L1un.png';
+var weixin = 'https://s1.ax1x.com/2020/06/15/N93VgO.png';
+
+var mood1 = 'https://s1.ax1x.com/2020/06/15/N9b6qx.png';
+var mood2 = 'https://s1.ax1x.com/2020/06/15/N93s2T.png';
+var mood3 = 'https://s1.ax1x.com/2020/06/15/N93wan.png';
+var mood4 = 'https://s1.ax1x.com/2020/06/15/N9bys1.png';
+var mood5 = 'https://s1.ax1x.com/2020/06/15/N93tKg.png';
+var mood6 = 'https://s1.ax1x.com/2020/06/15/N9bsMR.png';
+var mood7 = 'https://s1.ax1x.com/2020/06/15/N93cMF.png';
+var mood8 = 'https://s1.ax1x.com/2020/06/15/N9bDz9.png';
+var mood9 = 'https://s1.ax1x.com/2020/06/15/N9bBRJ.png';
+var mood10 = 'https://s1.ax1x.com/2020/06/15/N93Ubj.png';
+var mood11 = 'https://s1.ax1x.com/2020/06/15/N9bgZ6.png';
+var mood12 = 'https://s1.ax1x.com/2020/06/15/N9b2dK.png';
+var mood13 = 'https://s1.ax1x.com/2020/06/15/N9bRIO.png';
+var mood14 = 'https://s1.ax1x.com/2020/06/15/N9bfiD.png';
+var mood15 = 'https://s1.ax1x.com/2020/06/15/N9bhJe.png';
+var mood16 = 'https://s1.ax1x.com/2020/06/15/N93rGV.png';
+var mood17 = 'https://s1.ax1x.com/2020/06/15/N9b4RH.png';
+var mood18 = 'https://s1.ax1x.com/2020/06/15/N9b5zd.png';
+var mood19 = 'https://s1.ax1x.com/2020/06/15/N9305q.png';
+var mood20 = 'https://s1.ax1x.com/2020/06/15/N9boQA.png';
+var mood21 = 'https://s1.ax1x.com/2020/06/15/N93dVs.png';
+var mood22 = 'https://s1.ax1x.com/2020/06/15/N9bTsI.png';
+var mood23 = 'https://s1.ax1x.com/2020/06/15/N9b7Lt.png';
+var mood24 = 'https://s1.ax1x.com/2020/06/15/N9bbeP.png';
+var mood25 = 'https://s1.ax1x.com/2020/06/15/N9bqdf.png';
+var mood26 = 'https://s1.ax1x.com/2020/06/15/N9bLo8.png';
+var mood27 = 'https://s1.ax1x.com/2020/06/15/N9bXFS.png';
+var mood28 = 'https://s1.ax1x.com/2020/06/15/N9bjJg.png';
+var mood29 = 'https://s1.ax1x.com/2020/06/15/N9bvWQ.png';
+var mood30 = 'https://s1.ax1x.com/2020/06/15/N9bxzj.png';
+var moodImg = [mood1, mood2, mood3, mood4, mood5, mood6, mood7, mood8, mood9, mood10, mood11, mood12, mood13, mood14, mood15, mood16, mood17, mood18, mood19, mood20, mood21, mood22, mood23, mood24, mood25, mood26, mood27, mood28, mood29, mood30];
+module.exports = (_module$exports = {
+  moodImg: moodImg,
+  bg_first: bg_first,
+  bg_me: bg_me,
+  gugutang: gugutang,
+  first_newGoal: first_newGoal,
+  touxiang: touxiang,
+  diary_active: diary_active }, _defineProperty(_module$exports, "first_newGoal",
+first_newGoal), _defineProperty(_module$exports, "first_newTodo",
+first_newTodo), _defineProperty(_module$exports, "me_diary",
+me_diary), _defineProperty(_module$exports, "me_gugu",
+me_gugu), _defineProperty(_module$exports, "me_set",
+me_set), _defineProperty(_module$exports, "me_summary",
+me_summary), _defineProperty(_module$exports, "me_team",
+me_team), _defineProperty(_module$exports, "summary",
+summary), _defineProperty(_module$exports, "target_active",
+target_active), _defineProperty(_module$exports, "task_active",
+task_active), _defineProperty(_module$exports, "weixin",
+weixin), _module$exports);
+
+/***/ }),
+
+/***/ 190:
 /*!*********************************************************************!*\
   !*** C:/Users/24604/Desktop/小程序/gugu/components/uni-popup/popup.js ***!
   \*********************************************************************/
@@ -2723,7 +2797,7 @@ var index_esm = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _message = _interopRequireDefault(__webpack_require__(/*! ./message.js */ 190));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _message = _interopRequireDefault(__webpack_require__(/*! ./message.js */ 191));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 // 定义 type 类型:弹出类型：top/bottom/center
 var config = {
   // 顶部弹出
@@ -2750,7 +2824,7 @@ var config = {
 
 /***/ }),
 
-/***/ 190:
+/***/ 191:
 /*!***********************************************************************!*\
   !*** C:/Users/24604/Desktop/小程序/gugu/components/uni-popup/message.js ***!
   \***********************************************************************/
@@ -8811,7 +8885,7 @@ internalMixin(Vue);
 
 /***/ }),
 
-/***/ 219:
+/***/ 220:
 /*!*********************************************************************!*\
   !*** C:/Users/24604/Desktop/小程序/gugu/components/uni-icons/icons.js ***!
   \*********************************************************************/
@@ -8953,7 +9027,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 232:
+/***/ 233:
 /*!*********************************************************************************!*\
   !*** C:/Users/24604/Desktop/小程序/gugu/components/uni-swipe-action-item/mpwxs.js ***!
   \*********************************************************************************/
